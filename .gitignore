@@ -20,15 +20,38 @@ Aki_Data/Launcher/*
 !Aki_Data/Launcher/Patches/
 !Aki_Data/Launcher/Locales/
 
-#Include BepInEx
+#Include BepInEx core
 !BepInEx
 BepInEx/*
 !BepInEx/config
+BepInEx/*
 !BepInEx/config/BepInEx.cfg
 !BepInEx/config/com.bepis.bepinex.configurationmanager.cfg
 !BepInEx/core
 !BepInEx/patchers
+
+
+# BepInEx Plugins 
 !BepInEx/plugins
+
+## Questing bot ignores
+BepInEx/plugins/DanW-SPTQuestingBots/*
+!BepInEx/plugins/DanW-SPTQuestingBots/SPTQuestingBots.dll
+!BepInEx/plugins/DanW-SPTQuestingBots/quests
+
+## Sain ignores
+BepInEx/plugins/SAIN/*
+!BepInEx/plugins/SAIN/SAIN.dll
+!BepInEx/plugins/SAIN/BotTypes.json
+!BepInEx/plugins/SAIN/Default\ Bot\ Config\ Values
+!BepInEx/plugins/SAIN/Custom\ Personality\ Example
+!BepInEx/plugins/SAIN/Presets
+BepInEx/plugins/SAIN/Presets/*
+!BepInEx/plugins/SAIN/Presets/1.\ Baby\ Bots
+!BepInEx/plugins/SAIN/Presets/2.\ Less\ Difficult
+!BepInEx/plugins/SAIN/Presets/3.\ Default
+!BepInEx/plugins/SAIN/Presets/4.\ I\ Like\ Pain
+!BepInEx/plugins/SAIN/Presets/5.\ Death\ Wish
 
 
 #Include EscapeFromTarkov_Data/Managed/Aki.Common.dll & Aki.Reflection.dll
