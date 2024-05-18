@@ -22,6 +22,14 @@ Aki_Data/Launcher/*
 
 #Include BepInEx
 !BepInEx
+BepInEx/*
+!BepInEx/config
+!BepInEx/config/BepInEx.cfg
+!BepInEx/config/com.bepis.bepinex.configurationmanager.cfg
+!BepInEx/core
+!BepInEx/patchers
+!BepInEx/plugins
+
 
 #Include EscapeFromTarkov_Data/Managed/Aki.Common.dll & Aki.Reflection.dll
 !EscapeFromTarkov_Data/
