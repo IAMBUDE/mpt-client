@@ -4,7 +4,7 @@
     "main": "src/ModularNVG.js",
     "license": "CC BY-NC-SA 3.0",
     "author": "Borkel",
-    "akiVersion": "3.8.0",
+    "akiVersion": "3.8.*",
 	    "scripts": {
         "setup": "npm i",
         "build": "node ./packageBuild.ts"

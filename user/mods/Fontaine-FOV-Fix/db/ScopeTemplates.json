@@ -439,6 +439,6 @@
         "MaxZoom": 6,
         "IsFixed": false,
         "CanToggle": false,
-        "Unfuck": false
+        "Weight": 0.626
     }
 }
