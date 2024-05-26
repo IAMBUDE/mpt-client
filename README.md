@@ -18,5 +18,15 @@ How to install:
 12. Check your git client for any changes and discard them.
 13. You're now ready to play.
 
+# Video Guide - Installation
+[![Video Installation Guide]          // Title
+(https://i3.ytimg.com/vi/TSohCwwMw_c/maxresdefault.jpg)] // Thumbnail
+(https://youtu.be/TSohCwwMw_c "Video Installation Guide")  
+
+# Video Guide - Update
+[![Video Update Guide]          // Title
+(https://i3.ytimg.com/vi/BHYPlnRZbGM/maxresdefault.jpg)] // Thumbnail
+(https://www.youtube.com/watch?v=BHYPlnRZbGM "Video Update Guide")  
+
 # MPT Modlist
 - See [mpt-resource](https://github.com/IAMBUDE/mpt-resources)
