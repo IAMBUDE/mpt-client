@@ -46,13 +46,6 @@ BepInEx/plugins/SAIN/*
 !BepInEx/plugins/SAIN/Default\ Bot\ Config\ Values
 !BepInEx/plugins/SAIN/Custom\ Personality\ Example
 !BepInEx/plugins/SAIN/Presets
-BepInEx/plugins/SAIN/Presets/*
-!BepInEx/plugins/SAIN/Presets/1.\ Baby\ Bots
-!BepInEx/plugins/SAIN/Presets/2.\ Less\ Difficult
-!BepInEx/plugins/SAIN/Presets/3.\ Default
-!BepInEx/plugins/SAIN/Presets/4.\ I\ Like\ Pain
-!BepInEx/plugins/SAIN/Presets/5.\ Death\ Wish
-
 
 #Include EscapeFromTarkov_Data/Managed/Aki.Common.dll & Aki.Reflection.dll
 !EscapeFromTarkov_Data/
