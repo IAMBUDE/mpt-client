@@ -1,7 +1,7 @@
 {
   "PresetNotes": "",
   "Items": {
-    "HeatFactor": 1,
+    "HeatFactor": 0.2,
     "ExamineTime": 1,
     "ExamineKeys": false,
     "AddSignalPistolToSpec": false,
@@ -29,6 +29,7 @@
       "ShotgunRound": 20,
       "PistolRound": 70
     },
+    "AmmoSwitch": true,
     "RemoveRaidRestr": true,
     "RemoveBackpacksRestrictions": true,
     "AvoidSingleKeys": false,
@@ -61,7 +62,7 @@
     },
     "WaterFilterTime": 60,
     "BitcoinTime": 2416,
-    "MaxBitcoins": 3,
+    "MaxBitcoins": 5,
     "NoFuelMult": 1,
     "ScavCasePrice": 1,
     "ScavCaseTime": 0.35,
@@ -244,7 +245,7 @@
       "SkillFatigueReset": 200,
       "SkillFreshEffect": 1.3,
       "SkillFPoints": 2,
-      "SkillPointsBeforeFatigue": 2,
+      "SkillPointsBeforeFatigue": 3,
       "SkillMinEffect": 0.1,
       "SkillFatiguePerPoint": 0.4
     },
@@ -427,6 +428,7 @@
     "Therapist_Min": 12
   },
   "Quests": {
+    "EnableQuestsMisc": false,
     "QuestCostMult": 1,
     "QuestRepToZero": false,
     "DailyQuests": {

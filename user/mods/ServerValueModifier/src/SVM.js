@@ -31,211 +31,73 @@ class MainSVM
 		const Config = require('../Presets/' + PresetLoader.CurrentlySelectedPreset + '.json');
 		const StaticRouterModService = container.resolve("StaticRouterModService");
 		const HttpResponse = container.resolve("HttpResponseUtil");
-		const configServer = container.resolve("ConfigServer");
-		const questConfig = configServer.getConfig("aki-quest");
-		const JsonUtil = container.resolve("JsonUtil");
-		const RandomUtil = container.resolve("RandomUtil");
-		const TimeUtil = container.resolve("TimeUtil");
-		const RQC = container.resolve("RepeatableQuestController");
-		const RQG = container.resolve("RepeatableQuestGenerator");
-		const EOH = container.resolve("EventOutputHolder");
-		const ProfileHelper = container.resolve("ProfileHelper");
-		const ProfileFixerService = container.resolve("ProfileFixerService");
-		const paymentService = container.resolve("PaymentService");
-		const QuestHelper = container.resolve("QuestHelper");//Why, oh god why.
-
+		const repeatableQuestController = container.resolve("RepeatableQuestController");
 		//PRE LOAD - QUESTS SECTION
-		if (Config.Quests.EnableQuests)
+		if (Config.Quests.EnableQuests && Config.Quests.EnableQuestsMisc)//Horrible, as usual
 			{
-			container.afterResolution("RepeatableQuestController", (_t, result) => 
-				{//Basically a giant function being here just to change 2 files that is not outside configs, sweet.
-					result.getClientRepeatableQuests = (info, sessionID) => 
-					{
-						const returnData = [];
-						const pmcData = ProfileHelper.getPmcProfile(sessionID);
-						const time = TimeUtil.getTimestamp();
-						const scavQuestUnlocked = pmcData?.Hideout?.Areas?.find(hideoutArea => hideoutArea.type === 11)?.level >= 1;
-						for (const repeatableConfig of questConfig.repeatableQuests)
-						{
-							const currentRepeatableQuestType = RQC.getRepeatableQuestSubTypeFromProfile(repeatableConfig, pmcData);	
-							if (repeatableConfig.side === "Pmc" && pmcData.Info.Level >= repeatableConfig.minPlayerLevel|| repeatableConfig.side === "Scav" && scavQuestUnlocked)
-							{
-								if (time > currentRepeatableQuestType.endTime - 1)
+			container.afterResolution("QuestCallbacks", (_t, result) => 
+			{
+				result.activityPeriods = (url, info, sessionID) => 
+				{			
+					let Edited = repeatableQuestController.getClientRepeatableQuests(info, sessionID);
+					for (let quests in Edited)
+						{	
+							for(let act in Edited[quests].activeQuests )
 								{
-									currentRepeatableQuestType.endTime = time + repeatableConfig.resetTime;
-									currentRepeatableQuestType.inactiveQuests = [];
-									Logger.debug(`Generating new ${repeatableConfig.name}`);
-									const questsToKeep = [];
-									for (const activeQuest of currentRepeatableQuestType.activeQuests)
+								if(Edited[quests].activeQuests[act].changeCost[0].count !== undefined)
 									{
-										const quest = pmcData.Quests.find(quest => quest.qid === activeQuest._id);
-										if (quest)
-										{
-											if (quest.status === QuestStatus.AvailableForFinish)
-											{
-												questsToKeep.push(activeQuest);
-												Logger.debug(
-													`Keeping repeatable quest ${activeQuest._id} in activeQuests since it is available to hand in`,
-												);
-				
-												continue;
-											}
-										}
-										ProfileFixerService.removeDanglingConditionCounters(pmcData);
-										pmcData.Quests = pmcData.Quests.filter(quest => quest.qid !== activeQuest._id);
-										currentRepeatableQuestType.inactiveQuests.push(activeQuest);
+										Edited[quests].activeQuests[act].changeCost[0].count = 5000 * Config.Quests.QuestCostMult;
 									}
-									currentRepeatableQuestType.activeQuests = questsToKeep;
-									const questTypePool = RQC.generateQuestPool(repeatableConfig, pmcData.Info.Level);
-									for (let i = 0; i < RQC.getQuestCount(repeatableConfig, pmcData); i++)
-									{
-										let quest = null;
-										let lifeline = 0;
-										while (!quest && questTypePool.types.length > 0)
-										{
-											quest = RQG.generateRepeatableQuest(
-												pmcData.Info.Level,
-												pmcData.TradersInfo,
-												questTypePool,
-												repeatableConfig,
-											);
-											lifeline++;
-											if (lifeline > 10)
-											{
-												Logger.debug(
-													"We were stuck in repeatable quest generation. This should never happen. Please report",
-												);
-												break;
-											}
-										}
-										if (questTypePool.types.length === 0)
-										{
-											break;
-										}
-										quest.side = repeatableConfig.side;
-										currentRepeatableQuestType.activeQuests.push(quest);
-									}
-								}
-								else
-								{
-									Logger.debug(`[Quest Check] ${repeatableConfig.name} quests are still valid.`);
-								}
-							}
-							for (const quest of currentRepeatableQuestType.activeQuests)
-							{
-								currentRepeatableQuestType.changeRequirement[quest._id] = {
-									changeCost: quest.changeCost,
-									changeStandingCost: RandomUtil.getArrayValue([0, 0.01]),
-								};
-								currentRepeatableQuestType.changeRequirement[quest._id].changeCost[0].count *= Config.Quests.QuestCostMult;
 								if(Config.Quests.QuestRepToZero)
-								{
-									currentRepeatableQuestType.changeRequirement[quest._id].changeStandingCost = 0
+									{
+										Edited[quests].activeQuests[act].changeStandingCost = 0;
+									}
 								}
+								for(let inact in Edited[quests].inactiveQuests )
+								{
+								if(Edited[quests].inactiveQuests[inact].changeCost[0].count !== undefined)
+									{
+										Edited[quests].inactiveQuests[inact].changeCost[0].count = 5000 * Config.Quests.QuestCostMult;
+									}
+								if(Config.Quests.QuestRepToZero)
+									{
+										Edited[quests].inactiveQuests[inact].changeStandingCost = 0;
+									}
+									}
+								for(let req in Edited[quests].changeRequirement)
+									{
+										Edited[quests].changeRequirement[req].changeCost[0].count = 5000 * Config.Quests.QuestCostMult;
+									if(Config.Quests.QuestRepToZero)
+										{
+											Edited[quests].changeRequirement[req].changeStandingCost = 0;
+										}
+									}
 							}
-				
-							returnData.push({
-								id: repeatableConfig.id,
-								name: currentRepeatableQuestType.name,
-								endTime: currentRepeatableQuestType.endTime,
-								activeQuests: currentRepeatableQuestType.activeQuests,
-								inactiveQuests: currentRepeatableQuestType.inactiveQuests,
-								changeRequirement: currentRepeatableQuestType.changeRequirement,
-							});
-						}
-						return returnData;
+						return HttpResponse.getBody(Edited);
 					}
 				},{frequency: "Always"});
-			container.afterResolution("RepeatableQuestController", (_t, result) => 
-			{//Basically a giant function being here just to change 2 files that is not outside configs, sweet.
-				result.changeRepeatableQuest = (pmcData, changeRequest, sessionID) => 
-				{
-					let repeatableToChange;
-					let changeRequirement;
-					let replacedQuestTraderId;
-					for (const currentRepeatablePool of pmcData.RepeatableQuests){
-						const questToReplace = currentRepeatablePool.activeQuests.find((x)=>x._id === changeRequest.qid);
-						if (!questToReplace) {
-							continue;
-						}
-						replacedQuestTraderId = questToReplace.traderId;
-						currentRepeatablePool.activeQuests = currentRepeatablePool.activeQuests.filter((x)=>x._id !== changeRequest.qid);
-						changeRequirement = JsonUtil.clone(currentRepeatablePool.changeRequirement[changeRequest.qid]);
-						delete currentRepeatablePool.changeRequirement[changeRequest.qid];
-						const repeatableConfig = questConfig.repeatableQuests.find((x)=>x.name === currentRepeatablePool.name);
-						const questTypePool = RQC.generateQuestPool(repeatableConfig, pmcData.Info.Level);
-						const newRepeatableQuest = RQC.attemptToGenerateRepeatableQuest(pmcData, questTypePool, repeatableConfig);
-						if (newRepeatableQuest) {
-							newRepeatableQuest.side = repeatableConfig.side;
-							currentRepeatablePool.activeQuests.push(newRepeatableQuest);
-							currentRepeatablePool.changeRequirement[newRepeatableQuest._id] = {
-								changeCost: newRepeatableQuest.changeCost,
-								changeStandingCost: RandomUtil.getArrayValue([0,0.01])
-							};
-							currentRepeatablePool.changeRequirement[newRepeatableQuest._id].changeCost[0].count *= Config.Quests.QuestCostMult;
-							if(Config.Quests.QuestRepToZero)
-							{
-								currentRepeatablePool.changeRequirement[newRepeatableQuest._id].changeStandingCost = 0
-							}
-							const fullProfile = ProfileHelper.getFullProfile(sessionID);
-							QuestHelper.findAndRemoveQuestFromArrayIfExists(questToReplace._id, pmcData.Quests);
-							QuestHelper.findAndRemoveQuestFromArrayIfExists(questToReplace._id, fullProfile.characters.scav?.Quests ?? []);
-						}
-						repeatableToChange = JsonUtil.clone(currentRepeatablePool);
-						delete repeatableToChange.inactiveQuests;
-						break;
-					}
-					const output = EOH.getOutput(sessionID);
-					if (!repeatableToChange) {
-						const message = "Unable to find repeatable quest to replace";
-						Logger.error(message);
-						return HttpResponse.appendErrorToOutput(output, message);
-					}
-					for (const cost of changeRequirement.changeCost){
-						paymentService.addPaymentToOutput(pmcData, cost.templateId, cost.count, sessionID, output);
-						if (output.warnings.length > 0) {
-							return output;
-						}
-					}
-					const droppedQuestTrader = pmcData.TradersInfo[replacedQuestTraderId];
-					droppedQuestTrader.standing -= changeRequirement.changeStandingCost;
-					if (!output.profileChanges[sessionID].repeatableQuests) {
-						output.profileChanges[sessionID].repeatableQuests = [];
-					}
-					output.profileChanges[sessionID].repeatableQuests.push(repeatableToChange);
-					return output;
-				}
-			},{frequency: "Always"});
-		}
-			/*if (Config.Quests.EnableQuests)
-				{
+
 				container.afterResolution("QuestCallbacks", (_t, result) => 
 					{
 						result.changeRepeatableQuest = (pmcData, body, sessionID) => 
 						{					
-							const PresetLoader = require('../Loader/loader.json');
-							const Config = require('../Presets/' + PresetLoader.CurrentlySelectedPreset + '.json');
-							const RandomUtil = container.resolve("RandomUtil");
-							//const quest = pmcData.Quests.find(quest => quest.qid === activeQuest._id);
-							const repeatableQuestController = container.resolve("RepeatableQuestController");
+							//const repeatableQuestController = container.resolve("RepeatableQuestController");
 							let Edited = repeatableQuestController.changeRepeatableQuest(pmcData, body, sessionID);
-							for (let ids in Edited.changeRequirement)
-							{
-								Edited.changeRequirement[ids] = 
+							for (let quests in Edited.profileChanges)
 								{
-									changeCost:parseInt(Edited.changeRequirement[ids._id].changeCost * Config.Quests.QuestCostMult),
-									changeStandingCost: RandomUtil.getArrayValue([0, 0.01]),
-								};
-								if(Config.Quests.QuestRepToZero)
-								{
-									Edited.changeRequirement[ids].changeStandingCost = 0.05
+									for (let test in Edited.profileChanges[quests].repeatableQuests[0].changeRequirement)
+									{
+										Edited.profileChanges[quests].repeatableQuests[0].changeRequirement[test].changeCost[0].count = 5000 * Config.Quests.QuestCostMult;
+										if(Config.Quests.QuestRepToZero)
+										{
+											Edited.profileChanges[quests].repeatableQuests[0].changeRequirement[test].changeStandingCost = 0;
+										}
+									}
 								}
-							}
 							return Edited;
 						}
 					},{frequency: "Always"});
-				}*/
-
+			}
 		//PRE LOAD - RAIDS SECTION
 		if (Config.Hideout.EnableHideout)
 			{
@@ -265,7 +127,6 @@ class MainSVM
 				}
 			},{frequency: "Always"});
 		}
-
 		if (Config.Raids.SaveGearAfterDeath)
 		{
 		container.afterResolution("InraidCallbacks", (_t, result) => 
@@ -283,41 +144,32 @@ class MainSVM
 			},{frequency: "Always"});
 		}
 		if (Config.Raids.EnableRaids || Config.Custom.DebugAI) //Connected all 3 functions into one, 2 events and AI debug tool. Double IFs are cringe, but i didn't came up with a better solution.
-		//First is basically a band-aid to avoid exceptions if fields don't exist, and the second is applying the value.
 		{
-			StaticRouterModService.registerStaticRouter("AIGENERATION",
-				[
+			container.afterResolution("BotCallbacks", (_t, result) => 
 				{
-					url: "/client/game/bot/generate",
-					action: (url, info, sessionID) =>
+					result.generateBots = (url, info, sessionID) => 
 					{
-							const BotController = container.resolve("BotController");
-							if(Config.Raids.RaidEvents !== undefined)
+						const BotController = container.resolve("BotController");
+						for (let type in info.conditions)
 							{
 								if(Config.Raids.RaidEvents.RaidersEverywhere)
 								{
-									for (let type in info.conditions)
-									{
-										let roles = info.conditions[type]
-										roles.Role = "pmcBot"
-									}
+								let roles = info.conditions[type]
+								roles.Role = "pmcBot"
 								}
 								if(Config.Raids.RaidEvents.CultistsEverywhere)
 								{
-									for (let type in info.conditions)
-									{
-										let roles = info.conditions[type]
-										roles.Role = "sectantWarrior"
-									}
+								let roles = info.conditions[type]
+								roles.Role = "sectantWarrior"
 								}
-							}
-							if(Config.Custom.DebugAI)
+								if(Config.Custom.DebugAI)
 								{
 									Logger.info("/client/game/bot/generate data was: " + JSON.stringify(info.conditions))
 								}
-							return HttpResponse.getBody(BotController.generate(sessionID,info));
+							}
+						return HttpResponse.getBody(BotController.generate(sessionID,info));
 					}
-				}], "aki");
+				},{frequency: "Always"});
 		}
 		//PRE LOAD - CSM SECTION
 		if (Config.CSM.Pockets.DefaultPocket)
@@ -399,7 +251,7 @@ class MainSVM
 					}], "aki");
 		}
 		//HEALTH FUNCTIONS
-		if (Config.Player.EnableHealth || Config.Scav.EnableScavHealth || Config.Scav.ScavCustomPockets || Config.Player.EnableEnergyHydrationTab) //TO OVERRIDE HEALTH + CURRENT SCAV HEALTH AND POCKETS BEFORE RAID
+		if (Config.Player.EnableHealth || Config.Scav.EnableScavHealth || Config.Scav.ScavCustomPockets || Config.Player.EnableStats) //TO OVERRIDE HEALTH + CURRENT SCAV HEALTH AND POCKETS BEFORE RAID
 		{
 			StaticRouterModService.registerStaticRouter("EditHealth",
 				[
@@ -465,18 +317,22 @@ class MainSVM
 				}], "aki");
 		}
 	if (Config.Scav.EnableScavHealth || Config.Scav.ScavCustomPockets)
-	{ // TO OVERRIDE NEXT SCAVS HEALTH + POCKETS
-		// StaticRouterModService.registerStaticRouter("EditHealthv2",
-		// [
-		// {
-		// 	url: "/raid/profile/save",
-		// 	action: (url, info, sessionID) =>
-		// 	{
-		// 		ScavChanges(sessionID);
-		// 		saveServer.getProfile(sessionID).characters.scav = scavData;
-		// 		return HttpResponse.nullResponse();
-		// 	}
-		// }], "aki");
+	{ // TO OVERRIDE NEXT SCAVS HEALTH + POCKETS 
+		//May Omnissiah save our souls, have to use both because register affects deaths and resolution affects extracts. Don't ask
+		StaticRouterModService.registerStaticRouter("EditHealthv2",
+		[
+		{
+			url: "/raid/profile/save",
+			action: (url, info, sessionID) =>
+			{
+				const saveServer = container.resolve("SaveServer");
+				const playerScavGenerator = container.resolve("PlayerScavGenerator");
+				const scavData = playerScavGenerator.generate(sessionID);
+				ScavChanges(scavData);
+				saveServer.getProfile(sessionID).characters.scav = scavData;
+				return HttpResponse.nullResponse();
+			}
+		}], "aki");
 
 		container.afterResolution("ProfileController", (_t, result) => {
 			result.generatePlayerScav = (sessionID) => {
@@ -537,8 +393,6 @@ class MainSVM
 		{
 		return
 		}
-
-
 		//Config variables to asset for funcs.
 		const PresetLoader = require('../Loader/loader.json');
 		const Config = require('../Presets/' + PresetLoader.CurrentlySelectedPreset + '.json');
@@ -565,10 +419,7 @@ class MainSVM
 		const trader = require('G:/Games/EFTOFF/Aki_Data/Server/configs/trader.json');
 		const PMC = require('G:/Games/EFTOFF/Aki_Data/Server/configs/pmc.json');
 		*/
-
-
 		// Redirects to server internal configs.
-
 		const configServer = container.resolve("ConfigServer");
 		//const Seasons = configServer.getConfig("aki-seasonalevents")
 		const Inraid = configServer.getConfig("aki-inraid"); 
@@ -587,11 +438,10 @@ class MainSVM
 		//const BlackItems = configServer.getConfig("aki-item");
 		const PMC = configServer.getConfig("aki-pmc")
 		const Bot = DB.bots.types
-
 		//First initialising loggers
 		const funni = 
 		[
-		"So, how's Helldivers 2?",
+		"So, how's Helld...Ah, right, Sony.",
 		"Have you tried Minecraft though?","I hope Nikita is proud of me",
 		"This release provides you 16x time the details according to Todd Howard",
 		"Bears are based but cringe, Usecs are cringe but based",
@@ -614,16 +464,20 @@ class MainSVM
 		"No, Putting 16x Scope onto TOZ is not a great idea","Don't dissapoint the Glock Daddy","Still can't play streets, right? I feel ya",
 		"Go on, take SVD into factory, see if I care","RFB AND VPO FOR THE WIN!","Makes your experience better since 2021!",
 		"Dead diary, today I died with LEDX not in the secure container",
-		"ALL SCREWS, NO NUTS, WHY?","One does not simply to launch flare properly",
-		"Noooo, don't go that corridor, there is a mine in the room!",
+		"ALL SCREWS, NO NUTS, WHY?","One does not simply launch flare properly",
+		"Noooo, don't go that corridor, there is a mine in the room!","No more Autumn in Tarkov",
+		"The Holy Fox is gone","Don't play MMO's, those are unhealthy","I swear, stop putting those lines on Reddit",
+		"I really hope you do not restart the server to read those","There will be Up. Date. A creator on website nodes his head.",
+		"Stay Hydrated","Have you tried Gray Zone Warfare? :D","Still filled with bugs, don't worry",
+		"Pls leave a like an subscribe, don't forget to click a bell button","Google Clearly doesn't like me ;-;",
+		"Name of your PMC is disgusting, please revaluate your life choises","Why do you want to carry 2000 rouns in one slot?",
+		"Really? 20x2 cell sized pockets?","Extremis malis extrema remedia, effugere non potes","You're a PMC, Harry!","Join the Dark side, we have Igolniks",
 		"Imagine how many people died stepping on mines in Woods because they can't read the signs",
 		"Each new line added in message of the day is increasing the load on your CPU, let that sink in",
 		"Totally against Nikita(tm) vision(tm).","3 HEAVY BLEEDS IN ONE SHOT, THANKS SCAV!",
-		"You better not forget to take splint with you this time", "You cannot Escape From Tarkov","Releases like 1.8.0 will give me PTSD"]
+		"You better not forget to take splint with you this time", "You cannot Escape From -REDACTED BY LICENSE VIOLATION-","Releases like 1.8.0 will give me PTSD"]
 
-		Logger.log(`SVM 1.8.2 has initialized, ` + funni[Math.floor(Math.random() * funni.length)],"blue");
-
-
+		Logger.log(`SVM 1.8.3 has initialized, ` + funni[Math.floor(Math.random() * funni.length)],"blue");
 		if (PresetLoader.CurrentlySelectedPreset != "" && PresetLoader.CurrentlySelectedPreset != undefined)
 		{
 			Logger.log("SVM Preset - " + PresetLoader.CurrentlySelectedPreset + " - successfully loaded", "blue");
@@ -960,7 +814,15 @@ class MainSVM
 			Insurance.insuranceMultiplier["54cb57776803fa99248b456e"] = Config.Services.InsuranceMultTherapist;
 			Insurance.returnChancePercent["54cb50c76803fa8b248b4571"] = Config.Services.ReturnChancePrapor;
 			Insurance.returnChancePercent["54cb57776803fa99248b456e"] = Config.Services.ReturnChanceTherapist;
-			globals.Insurance.MaxStorageTimeInHour = Config.Services.InsuranceStorageTime;						
+
+			// globals.Insurance.MaxStorageTimeInHour = Config.Services.InsuranceStorageTime;
+			for(let trader in traders)
+			{
+				if(traders[trader].base.insurance.availability)
+					{
+						traders[trader].base.insurance.max_storage_time = Config.Services.InsuranceStorageTime;
+					}
+			}
 			traders["54cb50c76803fa8b248b4571"].base.insurance.min_return_hour = Config.Services.Prapor_Min;
 			traders["54cb50c76803fa8b248b4571"].base.insurance.max_return_hour = Config.Services.Prapor_Max;
 			traders["54cb57776803fa99248b456e"].base.insurance.min_return_hour = Config.Services.Therapist_Min;
@@ -1364,7 +1226,7 @@ class MainSVM
 					}
 				}
 				//Ammo Stacks
-				if (base._parent.includes("5485a8684bdc2da71d8b4567"))
+				if (base._parent.includes("5485a8684bdc2da71d8b4567") && Config.Items.AmmoSwitch)
 				{
 					let str = base._name//.split("_", 2)
 					if (AmmoFilter(PistolRounds,str))

@@ -29,6 +29,7 @@
       "ShotgunRound": 20,
       "PistolRound": 50
     },
+    "AmmoSwitch": false,
     "RemoveRaidRestr": false,
     "RemoveBackpacksRestrictions": false,
     "AvoidSingleKeys": false,
@@ -427,6 +428,7 @@
     "Therapist_Min": 12
   },
   "Quests": {
+    "EnableQuestsMisc": false,
     "QuestCostMult": 1,
     "QuestRepToZero": false,
     "DailyQuests": {

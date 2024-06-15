@@ -29,6 +29,7 @@
       "ShotgunRound": 30,
       "PistolRound": 90
     },
+    "AmmoSwitch": false,
     "RemoveRaidRestr": true,
     "RemoveBackpacksRestrictions": false,
     "AvoidSingleKeys": false,
@@ -325,7 +326,7 @@
       "KillaFactory": false,
       "BossesOnReserve": false,
       "CultistsEverywhere": false,
-      "RaidersEverywhere": false,
+      "RaidersEverywhere": true,
       "GlukharLabs": false
     },
     "LabInsurance": false,
@@ -427,6 +428,7 @@
     "Therapist_Min": 12
   },
   "Quests": {
+    "EnableQuestsMisc": false,
     "QuestCostMult": 1,
     "QuestRepToZero": false,
     "DailyQuests": {
@@ -737,7 +739,7 @@
     },
     "DisableLowLevelPMC": false,
     "LootableMelee": false,
-    "EnablePMC": false
+    "EnablePMC": true
   },
   "Custom": {
     "EnableCustom": false,
