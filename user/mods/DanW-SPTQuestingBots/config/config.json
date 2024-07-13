@@ -82,8 +82,8 @@
 			"min_health_legs": 50,
 			"max_overweight_percentage": 100,
 			"search_time_after_combat": {
-				"min": 10,
-				"max": 30
+				"min": 20,
+				"max": 45
 			},
 			"hearing_sensor": {
 				"enabled": true,
@@ -170,6 +170,7 @@
 			"desirability_weighting": 1,
 			"desirability_camping_multiplier": 1,
 			"desirability_sniping_multiplier": 1,
+			"desirability_active_quest_multiplier": 1.2,
 			"exfil_direction_weighting": {
 				"default": 0,
 				"factory4_day": 0.2,
@@ -188,6 +189,7 @@
 			"exfil_reached_min_fraction": 0.2,
 			"blacklisted_boss_hunter_bosses": [ "gifter", "arenaFighterEvent", "shooterBTR" ],
 			"airdrop_bot_interest_time": 420,
+			"elimination_quest_search_time": 60,
 			"eft_quests": {
 				"desirability": 60,
 				"max_bots_per_quest": 3,
@@ -228,11 +230,12 @@
 		}
 	},
 	"bot_spawns": {
-		"enabled": false,
+		"enabled": true,
 		"blacklisted_pmc_bot_brains": [ "bossKilla", "bossTagilla", "exUsec", "followerGluharAssault", "followerGluharProtect", "crazyAssaultEvent", "bossKnight" ],
 		"spawn_retry_time": 10,
 		"delay_game_start_until_bot_gen_finishes": true,
 		"spawn_initial_bosses_first": false,
+		"non_wave_bot_spawn_period_factor": 3,
 		"advanced_eft_bot_count_management": {
 			"enabled": true,
 			"use_EFT_bot_caps": true,

@@ -109,6 +109,8 @@ The three major data structures are:
     * **maxDistanceFromBot**: The objective will only be selected if the bot is no more than this many meters away from it.
     * **maxRunDistance**: If bots get within this radius (in meters) of the position for the first step in the objective, they will no longer be allowed to sprint. This is intended to be used in areas where stealth is more important (typically in buildings). This is **0** by default. 
     * **lootAfterCompleting**: The only valid options for this are "Default", "Force", and "Inhibit" (case-sensitive). If "Force" is used, Questing Bots will try invoking [Looting Bots](https://hub.sp-tarkov.com/files/file/1096-looting-bots/) to make the bot scan for loot immediately after completing each step in the objective. However, bots will not be able to loot if they're in combat or have no available space. If "Inhibit" is used, this mod will try invoking [Looting Bots](https://hub.sp-tarkov.com/files/file/1096-looting-bots/) to prevent the bot from looting until after it selects another quest objective. [Looting Bots](https://hub.sp-tarkov.com/files/file/1096-looting-bots/) version 1.2.1 or later is required for either option to work. [SAIN](https://hub.sp-tarkov.com/files/file/1062-sain-2-0-solarint-s-ai-modifications-full-ai-combat-system-replacement/) 2.1.9 or later is required for Questing Bots to properly force bots to loot.
+    * **doorIDToUnlock**: If specified, the door with this ID must be unlocked before bots are allowed to proceed with any steps in the objective. The door's state will be checked when the bot is within **questing.unlocking_doors.search_radius** meters of the objective's first step position. 
+    * **fixedPositionToUnlockDoor**: If **doorIDToUnlock** is specified, this field can optionally be added to specify an exact position where bots will stand to open the door. If this field is omitted, the interaction position will be determined programmatically. 
     * **steps**: An array of the steps in the objective. Bots will complete the steps exactly in the order you specify.
 
 * **Steps**: A step is an individual component of an objective. 
@@ -153,7 +155,7 @@ The three major data structures are:
 Since normal AI Limit mods will disable bots that are questing (which will prevent them from exploring the map), this mod has its own AI Limiter with the following features:
 * AI Limiting must be explicitly enabled in the F12 menu. 
 * AI Limiting must be explicitly enabled for bots that are questing for each map. By default, questing bots will only be disabled on Streets. 
-* Bots will only be allowed to be disabled if they are beyond a certain distance (200m by default) from you
+* Bots will only be allowed to be disabled if they are beyond a certain distance (200m by default) from human players. There are individual map-specific distances that can be adjusted by enabling advanced settings in the F12 menu, but the global setting will take priority. In other words, the actual limiting distance is the minimum of the two (the map-specific value and the global value). By default, all map-specific distances are set to 1000m to avoid confusion when only the global setting is adjusted.  
 * Bots will only be allowed to be disabled if they are beyond a certain distance (75m by default) from other bots that are questing (and not disabled)
 
 **---------- Configuration Options in *config.json* ----------**
@@ -267,11 +269,13 @@ Since normal AI Limit mods will disable bots that are questing (which will preve
 * **questing.bot_quests.desirability_weighting**: A factor to change how much the desirability of quests are weighted when selecting new quests for bots. Higher numbers mean that bots will tend to select quests that are more desirable even if they're further away. This is **1** by default. 
 * **questing.bot_quests.desirability_camping_multiplier**: The desirability of all camping quests (determined by **isCamping=true** in their settings) will be multiplied by this factor. This is **1** by default. 
 * **questing.bot_quests.desirability_sniping_multiplier**: The desirability of all sniping quests (determined by **isSniping=true** in their settings) will be multiplied by this factor. This is **1** by default. 
+* **questing.bot_quests.desirability_active_quest_multiplier**: The desirability of all EFT quests will be multiplied by this factor if it's an active quest for you. This is **1.2** by default. 
 * **questing.bot_quests.exfil_direction_weighting.xxx**: A factor to change how likely bots are to select new quests that are in the direction of their selected exfil point. Higher numbers mean that bots will tend to select quests that are on the way to their selected exfil even if they're undesirable. This factor is different for every map. 
 * **questing.bot_quests.exfil_direction_max_angle**: If the angle between the vector from a bot to its selected exfil and the vector from the bot to a quest objective is below this value (in degrees), the angle will be ignored (treated as 0 deg) for that objective when selecting new quests for bots. This is to allow bots to meander toward their selected exfil instead of having them tend to follow a straight path toward it. This is **90** deg by default. 
 * **questing.bot_quests.exfil_reached_min_fraction**: This value is multiplied by the maximum distance between all exfils on the map to determine the distance threshold below which bots will change their selected exfils. If a bot travels within that threshold of its selected exfil, it will choose a new exfil. This is to allow bots to travel around the map instead of gravitating toward their initially selected exfils even after they reach them. This is **0.2** by default. 
 * **questing.bot_quests.blacklisted_boss_hunter_bosses**: An array containing the names of bosses that bots doing the "Boss Hunter" quest will not be allowed to hunt.
 * **questing.bot_quests.airdrop_bot_interest_time**: The time (in seconds) after an airdop lands during which bots can go to it via an "Airdrop Chaser" quest. This is **420** s by default. 
+* **questing.bot_quests.elimination_quest_search_time**: The time (in seconds) a bot will wait before selecting another quest after reaching each objective in an elimination EFT quest. This is **60** s by default. 
 * **questing.bot_quests.eft_quests.xxx**: The settings to apply to all quests based on EFT's quests. 
 * **questing.bot_quests.spawn_rush.xxx**: The settings to apply to the "Spawn Rush" quest. 
 * **questing.bot_quests.spawn_point_wander.xxx**: The settings to apply to the "Spawn Point Wandering" quest.
@@ -296,6 +300,7 @@ Since normal AI Limit mods will disable bots that are questing (which will preve
 * **bot_spawns.spawn_retry_time**: If any bots fail to spawn, no other attempts will be made to spawn more of them for this amount of time (in seconds). By default, this is **10** s.
 * **bot_spawns.delay_game_start_until_bot_gen_finishes**: After the final loading screen shows "0:00.000" for a few seconds, the game will be further delayed from starting if not all bots have been generated. Without doing this, PMC's may not spawn immediately when the raid starts, and the remaining bots will take much longer to generate. This is **true** by default. 
 * **bot_spawns.spawn_initial_bosses_first**: If initial bosses must spawn before PMC's are allowed to spawn. This does not apply to Factory (Day or Night). If this is **false** and **bot_spawns.advanced_eft_bot_count_management.enabled=false**, initial PMC spawns may prevent some bosses (i.e. Rogues on Lighthouse) from spawning at the beginning of the raid. This is **false** by default and assumes **bot_spawns.advanced_eft_bot_count_management.enabled=true**.
+* **bot_spawns.non_wave_bot_spawn_period_factor**: The value of BotSpawnPeriodCheck for each map will be adjusted by a factor of this setting. Bots will spawn less frequently when this is >1 and more frequently when it's <1. This is **3** by default to reduce the "swarming" feeling of the "new" EFT spawning system used in EFT 0.14.x.
 * **bot_spawns.advanced_eft_bot_count_management.enabled**: If **true**, this enables code that tricks EFT into thinking that bots generated by this mod are human players. This makes EFT ignore bot caps (both total and zone-specific) for PMC's and player Scavs generated by this mod. This is **true** by default. 
 * **bot_spawns.advanced_eft_bot_count_management.use_EFT_bot_caps**: If **bot_spawns.advanced_eft_bot_count_management.enabled=true**, SPT's bot caps will be changed to match EFT's bot caps. This is **true** by default.
 * **bot_spawns.advanced_eft_bot_count_management.only_decrease_bot_caps**: If **bot_spawns.advanced_eft_bot_count_management.enabled=true** and **bot_spawns.advanced_eft_bot_count_management.use_EFT_bot_caps=true**, SPT's bot caps will be changed to match EFT's bot caps only if EFT's bot caps are lower. This is **true** by default.
@@ -340,22 +345,6 @@ Since normal AI Limit mods will disable bots that are questing (which will preve
 * Bots take the most direct path to their objectives, which may involve running in the middle of an open area without any cover.
 * Certain bot "brains" stay in a combat state for a long time, during which they're unable to continue their quests.
 * Certain bot "brains" are blacklisted because they cause the bot to always be in a combat state and therefore never quest (i.e. exUSEC's when they're near a stationary weapon)
-* Some quest items or locations can't be resolved:
-    * Fortress for Capturing Outposts in Customs
-    * Scav Base for Capturing Outposts in Woods
-    * Health Resort for Capturing Outposts in Shoreline
-    * Bronze pocket watch for Checking in Customs
-    * Flash drive with fake info for Bullshit in Customs
-    * Mountain Area for Return the Favor in Woods
-    * The second and third bunkers for Assessment Part 2 in Woods
-    * The satellite antenna in the USEC camp for Return the Favor in Woods
-    * The cottage area for Overpopulation in Lighthouse
-    * The main area for Assessment - Part 1 in Lighthouse
-    * The bridge for Knock-Knock in Lighthouse
-    * All locations for Long Line in Interchange
-    * The 21WS Container for Provocation in Interchange
-    * The underground depot for Safe Corridor in Reserve
-    * One of the locations for Bunker Part 2 in Reserve (not sure which)
 * Bots sometimes unlock doors for no reason if they can't properly resolve their quest locations. Examples include marking the tanker at New Gas in Customs; bots will fail to find a position to mark the tanker and then nearby unlock rooms in New Gas for no reason.
 * A *"Destroying GameObjects immediately is not permitted during physics trigger/contact, animation event callbacks or OnValidate. You must use Destroy instead."* error will sometimes appear in the game console after a bot unlocks a door. This can be ignored. 
 * Player-level ranges for some quests are not reasonable, so bots may do late-game quests at low player levels and vice versa. This is because EFT has no minimum level defined for several quest lines.
@@ -370,22 +359,19 @@ Since normal AI Limit mods will disable bots that are questing (which will preve
 
 **---------- Roadmap (Expect Similar Accuracy to EFT's) ----------**
 
-* **0.5.2** (ETA: Late June)
-    * New AI-limiter options
+* **0.7.0** (ETA: Mid July)
+    * Update to SPT 3.9.0
+* **0.7.1** (ETA: Late July)
     * Improvements with how Questing Bots interacts with SAIN:
         * Better transitioning between combat and questing
-        * Bug fixes for bots suddenly forgetting about their enemies
         * Ability to have bots avoid quests in dangerous areas of the map
-* **0.5.3** (ETA: Mid July)
-    * Add new quest type: hidden-stash running
-    * Add optional quest prerequisite to have at least one item in a list (i.e. a sniper rifle for sniping areas or an encoded DSP for Lighthouse)
-    * Add configuration options to overwrite default settings for EFT-based quests and their objectives
-* **0.6.0** (ETA: Early August)
+    * Add the ability to require certain weapon classes for quests (i.e. do not allow a bot with only a pistol to perform a sniping quest)
+* **0.8.0** (ETA: Early September)
     * Separate spawning system into a separate mod
 * **Backlog**
     * Move initial quest-data generation to the server to protect for mods that add lots of quests (like QuestManiac)
+    * Add new quest type: hidden-stash running
     * Add new quest type: blood-thirsty cheater (will be disabled by default)
-    * Add config option to increase the desirability of quests that you currently have
 * **Not Planned**
     * Add waypoints to have PMC's path around dangerous spots in the map or in very open areas
 
