@@ -1,0 +1,67 @@
+/*
+
+#Base files
+!.gitignore
+!README.md
+
+#Unneeded stuff
+**/.DS_Store
+**.log
+
+#Include Aki_Data
+!Aki_Data/
+
+#Include Aki_Data/Server
+!Aki_Data/Server/
+
+#Include Aki_Data/Launcher/Patches & /Locales
+!Aki_Data/Launcher/
+Aki_Data/Launcher/*
+!Aki_Data/Launcher/Patches/
+!Aki_Data/Launcher/Locales/
+
+#Include BepInEx core
+!BepInEx
+BepInEx/*
+!BepInEx/config
+BepInEx/*
+!BepInEx/config/BepInEx.cfg
+!BepInEx/config/com.bepis.bepinex.configurationmanager.cfg
+!BepInEx/core
+!BepInEx/patchers
+
+
+# BepInEx Plugins 
+!BepInEx/plugins
+
+## Questing bot ignores
+#BepInEx/plugins/DanW-SPTQuestingBots/*
+#!BepInEx/plugins/DanW-SPTQuestingBots/SPTQuestingBots.dll
+#!BepInEx/plugins/DanW-SPTQuestingBots/quests
+
+## Sain ignores
+#BepInEx/plugins/SAIN/*
+#!BepInEx/plugins/SAIN/SAIN.dll
+#!BepInEx/plugins/SAIN/BotTypes.json
+#!BepInEx/plugins/SAIN/Default\ Bot\ Config\ Values
+#!BepInEx/plugins/SAIN/Custom\ Personality\ Example
+#!BepInEx/plugins/SAIN/Presets
+
+#Include EscapeFromTarkov_Data/Managed/Aki.Common.dll & Aki.Reflection.dll
+!EscapeFromTarkov_Data/
+EscapeFromTarkov_Data/*
+!EscapeFromTarkov_Data/Managed
+EscapeFromTarkov_Data/Managed/*
+!EscapeFromTarkov_Data/Managed/Aki.Common.dll
+!EscapeFromTarkov_Data/Managed/Aki.Reflection.dll
+
+#Include User/Mods/
+!User
+User/*
+!User/Mods
+
+#Include other files
+!Aki.Launcher.exe
+!Aki.Server.exe
+!doorstop_config.ini
+!winhttp.dll
