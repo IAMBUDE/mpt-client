@@ -12,7 +12,7 @@
    "Spawns": {
       "useGlobalSpawnChance": true,
       "bloodhounds": {
-         "customs": 5,
+         "customs": 15,
          "factory": 0,
          "factory_night": 0,
          "groundzero": 0,
@@ -20,22 +20,22 @@
          "laboratory": 0,
          "lighthouse": 0,
          "reserve": 0,
-         "shoreline": 5,
+         "shoreline": 15,
          "streets": 0,
-         "woods": 5
+         "woods": 15
       },
       "cultists": {
-         "customs": 10,
+         "customs": 30,
          "factory": 0,
-         "factory_night": 2,
+         "factory_night": 10,
          "groundzero": 0,
          "interchange": 0,
          "laboratory": 0,
          "lighthouse": 0,
          "reserve": 0,
-         "shoreline": 10,
+         "shoreline": 30,
          "streets": 0,
-         "woods": 12
+         "woods": 40
       },
       "raiders": {
          "customs": 0,
@@ -43,9 +43,9 @@
          "factory_night": 0,
          "groundzero": 0,
          "interchange": 0,
-         "laboratory": 65,
+         "laboratory": 75,
          "lighthouse": 0,
-         "reserve": 65,
+         "reserve": 75,
          "shoreline": 0,
          "streets": 0,
          "woods": 0
@@ -64,17 +64,17 @@
          "woods": 0
       },
       "scav_snipers": {
-         "customs": 65,
+         "customs": 85,
          "factory": 0,
          "factory_night": 0,
          "groundzero": 0,
          "interchange": 0,
          "laboratory": 0,
-         "lighthouse": 65,
+         "lighthouse": 85,
          "reserve": 0,
-         "shoreline": 65,
-         "streets": 65,
-         "woods": 65
+         "shoreline": 85,
+         "streets": 85,
+         "woods": 85
       }
    },
    "MaxBotCap": {
