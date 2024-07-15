@@ -46,7 +46,9 @@
         "ravangeZryachiyEvent": 5,
         "sectactPriestEvent": 10,
         "pmcUSEC": 15,
-        "pmcBEAR": 15
+        "pmcBEAR": 15,
+		"peacemaker": 10,
+		"skier": 10
     },
     "bosses": [
         "bossBully",
@@ -427,7 +429,9 @@
             "5751a25924597722c463c472": 2,
             "544fb37f4bdc2dee738b4567": 2
         },
-        "shooterbtr": {}
+        "shooterbtr": {},
+		"skier": {},
+		"peacemaker": {}
     },
     "equipment": {
         "assault": {
@@ -775,6 +779,32 @@
             "weaponSlotIdsToMakeRequired": [
                 "mod_reciever"
             ]
+        },
+		"peacemaker": {
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 95,
+            "faceShieldIsActiveChancePercent": 100,
+            "lightIsActiveDayChancePercent": 35,
+            "lightIsActiveNightChancePercent": 95,
+            "laserIsActiveChancePercent": 95,
+            "forceStock": true,
+            "weaponModLimits": {
+                "scopeLimit": 1,
+                "lightLaserLimit": 1
+            }
+        },
+		"skier": {
+            "nvgIsActiveChanceDayPercent": 10,
+            "nvgIsActiveChanceNightPercent": 95,
+            "faceShieldIsActiveChancePercent": 100,
+            "lightIsActiveDayChancePercent": 35,
+            "lightIsActiveNightChancePercent": 95,
+            "laserIsActiveChancePercent": 95,
+            "forceStock": true,
+            "weaponModLimits": {
+                "scopeLimit": 1,
+                "lightLaserLimit": 1
+            }
         },
         "arenafighterevent": {
             "nvgIsActiveChanceDayPercent": 10,
@@ -2672,9 +2702,10 @@
                 "250": 1
             },
             "5d235b4d86f7742e017bc88a": {
-                "1": 10,
-                "2": 3,
-                "3": 1
+                "1": 8,
+                "2": 4,
+                "5": 4,
+				"10": 1
             }
         },
         "assault": {
@@ -2698,7 +2729,7 @@
                 "250": 1
             },
             "5d235b4d86f7742e017bc88a": {
-                "1": 10,
+                "1": 15,
                 "2": 3,
                 "3": 1
             }

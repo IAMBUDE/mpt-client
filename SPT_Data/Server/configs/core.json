@@ -1,5 +1,5 @@
 {
-    "sptVersion": "3.9.0",
+    "sptVersion": "3.9.1",
     "projectName": "SPT",
     "compatibleTarkovVersion": "0.14.9.30626",
     "serverName": "SPT Server",
@@ -28,11 +28,12 @@
                 "giveCommandEnabled": true
             },
             "commandUseLimits": {
-                "StashRows": 5
+                "StashRows": 15
             }
-        }
+        },
+        "createNewProfileTypesBlacklist": []
     },
     "customWatermarkLocaleKeys": [],
-    "commit": "002209a992253888d025344f831b28077a5210d1",
-    "buildTime": 1720291962757
+    "commit": "83b4ecc17642a81cd55e4ac1490541dffb36186a",
+    "buildTime": 1720944550621
 }
