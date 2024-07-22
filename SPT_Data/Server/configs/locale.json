@@ -1,6 +1,6 @@
 {
-    "gameLocale": "en",
-    "serverLocale": "en",
+    "gameLocale": "system",
+    "serverLocale": "system",
     "serverSupportedLocales": [
         "ar",
         "en",
