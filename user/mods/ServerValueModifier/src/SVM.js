@@ -84,6 +84,49 @@ class MainSVM {
    }
   }
   //PRE LOAD - RAIDS SECTION
+  // StaticRouterModService.registerStaticRouter("EventOverride",
+  //   [
+  //    {
+  //     url: "/client/game/version/validate",
+  //     action: (url, info, sessionID) => {
+  //       const SeasonalEventService = container.resolve("SeasonalEventService");
+  //       SeasonalEventService.enableSeasonalEvents(sessionID)
+  //       return HttpResponse.nullResponse();
+  //     }
+  //    }
+  //   ], "spt");
+  StaticRouterModService.registerStaticRouter("EventOverride",
+       [
+        {
+        url: "/client/game/version/validate",
+        action: (url, info, sessionID) => {
+          const DB = container.resolve("DatabaseService");
+          const globalConfig = DB.getGlobals().config;
+          const SeasonalEventService = container.resolve("SeasonalEventService");
+          //let event = [];
+          if (Config.Raids.RaidEvents.Christmas)
+          {
+            //event.push("Christmas")
+            SeasonalEventService.updateGlobalEvents(sessionID, globalConfig, "Christmas");
+          }
+          if (Config.Raids.RaidEvents.Halloween)
+          {
+            //event.push("Halloween")
+            SeasonalEventService.updateGlobalEvents(sessionID, globalConfig, "Halloween");
+          }          
+          if (Config.Raids.RaidEvents.SnowEvent)
+            {
+              SeasonalEventService.updateGlobalEvents(sessionID, globalConfig, "Snow");
+            }
+          return HttpResponse.nullResponse();
+        }
+      }
+    ], "spt");
+    // const globalConfig = this.databaseService.getGlobals().config;
+    // for (const event of this.currentlyActiveEvents)
+    // {
+    //     this.updateGlobalEvents(sessionId, globalConfig, event);
+    // }
   if (Config.Hideout.EnableHideout) {
    if (Config.Hideout.Regeneration.OfflineRegen) {
     container.afterResolution("GameController", (_t, result) => {
@@ -116,6 +159,8 @@ class MainSVM {
     }
    }, { frequency: "Always" });
   }
+
+
   // if (Config.Raids.EnableRaids || Config.Custom.DebugAI) //Connected all 3 functions into one, 2 events and AI debug tool. Double IFs are cringe, but i didn't came up with a better solution.
   // { 3.9.0 Seems like this will be removed
   // 	container.afterResolution("BotCallbacks", (_t, result) => 
@@ -286,7 +331,7 @@ class MainSVM {
      {
       url: "/raid/profile/save",
       action: (url, info, sessionID) => {
-       if (info.exit !== "survived" && info.exit !== "runner") // 3.9.0 If statement for avoiding rerolling survived SCAV, biggest issue of 1.8.3
+       if (info.exit !== "survived" && info.exit !== "runner" && info.isPlayerScav) // 3.9.0 If statement for avoiding rerolling survived SCAV, biggest issue of 1.8.3
        {
         const saveServer = container.resolve("SaveServer");
         const playerScavGenerator = container.resolve("PlayerScavGenerator");
@@ -377,7 +422,7 @@ class MainSVM {
     "Have you tried Minecraft though?", "I hope Nikita is proud of me",
     "This release provides you 16x time the details according to Todd Howard",
     "Bears are based but cringe, Usecs are cringe but based",
-    "85.499% of the update time were wasted for this specific line you're reading",
+    "81.333% of the update time were wasted for this specific line you're reading",
     "Still not enough tooltips added, slight chance to get stuck in a toaster",
     "Kept ya waiting huh?", "You're finally awake, you were trying to play like a chad, right?",
     "It's here, lurking in the shadows", "Chomp goes Caw Caw", "Goose goes Honk Honk", "GhostFenixx goes 'Not again'", "No more KMC ;-;",
@@ -408,6 +453,7 @@ class MainSVM {
     "Each new line added in message of the day is increasing the load on your CPU, let that sink in",
     "Totally against Nikita(tm) vision(tm).", "3 HEAVY BLEEDS IN ONE SHOT, THANKS SCAV!",
     "What else can be so joyful than making a mod on my birthday? Not playing SPT afterwards!",
+    "Nice work bitch!","You can never go wrong loading .366 into 7.62x39 chamber",
     "There was a blue sky and bright yellow field, but now it is always dark and gray",
     "This mod probably works...Mostly? Hopefully?",
     "I have 59 bazillion mods, why X field doesn't work?",
@@ -420,7 +466,7 @@ class MainSVM {
     "Want some music recommendation? Check Imminence.",
     "You better not forget to take splint with you this time", "You cannot Escape From -REDACTED BY LICENSE VIOLATION-", "Releases like 1.8.0 will give me PTSD"]
 
-  Logger.log(`SVM 1.9.0 has initialized, ` + funni[Math.floor(Math.random() * funni.length)], "blue");
+  Logger.log(`SVM 1.9.1 has initialized, ` + funni[Math.floor(Math.random() * funni.length)], "blue");
   if (PresetLoader.CurrentlySelectedPreset != "" && PresetLoader.CurrentlySelectedPreset != undefined) {
    Logger.log("SVM Preset - " + PresetLoader.CurrentlySelectedPreset + " - successfully loaded", "blue");
   }
@@ -825,7 +871,6 @@ class MainSVM {
     let CustomPocketItem = JsonUtil.clone(items["627a4e6b255f7527fb05a0f6"])
     let PocketSize = Config.CSM.Pockets
     CustomPocketItem._id = "a8edfb0bce53d103d3f62b9b";
-    Logger.info(CustomPocketItem._id)
     CustomPocketItem._props.Grids[0]._id = "a8edfb0bce53d103d3f62b0b"
     CustomPocketItem._props.Grids[0]._parent = "a8edfb0bce53d103d3f62b9b"
     CustomPocketItem._props.Grids[0]._props.cellsH = PocketSize.FirstH
@@ -920,14 +965,47 @@ class MainSVM {
     items["a8edfb0bce53d103d3f62b9b"] = CustomPocketItem;
     //items["5795f317245977243854e041"]._props.HideEntrails = true; Still unsure what does it do
    }
-   const Cases = Config.CSM.Cases
+   if(Config.CSM.EnableSecureCases)
+   {
    const SecCon = Config.CSM.SecureContainers
-   const SecConID = ["544a11ac4bdc2d470e8b456a",
+   const SecConID = [
+    "544a11ac4bdc2d470e8b456a",
     "5c093ca986f7740a1867ab12",
     "5857a8b324597729ab0a0e7d",
     "59db794186f77448bc595262",
-    "5857a8bc2459772bad15db29"
+    "5857a8bc2459772bad15db29",
+    "665ee77ccf2d642e98220bca",
+    "5732ee6a24597719ae0c0281",
+    "64f6f4c5911bcdfe8b03b0dc",
    ]
+   const SecVsize = [
+  SecCon.AlphaVSize,
+   SecCon.KappaVSize,
+   SecCon.BetaVSize,
+   SecCon.EpsilonVSize,
+   SecCon.GammaVSize,
+   SecCon.GammaTUEVSize,
+   SecCon.WaistPouchVSize,
+   SecCon.DevVSize
+   ];
+   const SecHsize = [
+   SecCon.AlphaHSize,
+   SecCon.KappaHSize,
+   SecCon.BetaHSize,
+   SecCon.EpsilonHSize,
+   SecCon.GammaHSize,
+   SecCon.GammaTUEHSize,
+   SecCon.WaistPouchHSize,
+   SecCon.DevHSize
+   ];
+   for (let SecConts in SecConID) {
+    items[SecConID[SecConts]]._props.Grids[0]._props["cellsV"] = SecVsize[SecConts];
+    items[SecConID[SecConts]]._props.Grids[0]._props["cellsH"] = SecHsize[SecConts];
+   }
+  }
+   if(Config.CSM.EnableCases)
+   {
+   const Cases = Config.CSM.Cases
    const CasesID = ["59fb016586f7746d0d4b423a",
     "5783c43d2459774bbe137486",
     "60b0f6c058e0b0481a09ad11",
@@ -973,22 +1051,6 @@ class MainSVM {
     Cases.KeycardHolderCase,
     Cases.GKeychain
    ]
-   const SecVsize = [SecCon.AlphaVSize,
-   SecCon.KappaVSize,
-   SecCon.BetaVSize,
-   SecCon.EpsilonVSize,
-   SecCon.GammaVSize,
-   SecCon.WaistPouchVSize,
-   SecCon.DevVSize
-   ];
-   const SecHsize = [SecCon.AlphaHSize,
-   SecCon.KappaHSize,
-   SecCon.BetaHSize,
-   SecCon.EpsilonHSize,
-   SecCon.GammaHSize,
-   SecCon.WaistPouchHSize,
-   SecCon.DevHSize
-   ];
    const Filts = [
     Cases.MoneyCase.Filter,
     Cases.SimpleWallet.Filter,
@@ -1012,10 +1074,6 @@ class MainSVM {
     Cases.KeycardHolderCase.Filter,
     Cases.GKeychain.Filter
    ]
-   for (let SecConts in SecConID) {
-    items[SecConID[SecConts]]._props.Grids[0]._props["cellsV"] = SecVsize[SecConts];
-    items[SecConID[SecConts]]._props.Grids[0]._props["cellsH"] = SecHsize[SecConts];
-   }
    for (let Case in CasesID) {
     items[CasesID[Case]]._props.Grids[0]._props["cellsV"] = Size[Case].VSize;
     items[CasesID[Case]]._props.Grids[0]._props["cellsH"] = Size[Case].HSize;
@@ -1027,6 +1085,7 @@ class MainSVM {
      items[CasesID[Filters]]._props.Grids[0]._props.filters = [];
     }
    }
+  }
   }
   //############## ITEMS SECTION ################
   if (Config.Items.EnableItems) {
@@ -1126,15 +1185,15 @@ class MainSVM {
     }
     //Change money stacks
     if (base._parent == "543be5dd4bdc2deb348b4569" && base._props.StackMaxSize !== undefined) {
-     if (Config.Items.BSGCashStack) {
-      if (base._id == "569668774bdc2da2298b4568" || base._id == "5696686a4bdc2da3298b456a") {
-       EditSimpleItemData(id, "StackMaxSize", (Config.Items.RubStack / 10).toFixed()); //If it's Euros or Dollars - make stacks smaller by one digit, to fit live settings to a degree
-      }
-      else {
-       EditSimpleItemData(id, "StackMaxSize", Config.Items.RubStack);
-      }
-     }
-     else {
+     if (Config.Items.EnableCurrency) {
+    //   if (base._id == "569668774bdc2da2298b4568" || base._id == "5696686a4bdc2da3298b456a") {
+    //    EditSimpleItemData(id, "StackMaxSize", (Config.Items.RubStack / 10).toFixed()); //If it's Euros or Dollars - make stacks smaller by one digit, to fit live settings to a degree
+    //   }
+    //   else {
+    //    EditSimpleItemData(id, "StackMaxSize", Config.Items.RubStack);
+    //   }
+    //  }
+    //  else {
       switch (base._id) {
        case "569668774bdc2da2298b4568":
         EditSimpleItemData(id, "StackMaxSize", Config.Items.EuroStack);
@@ -1142,10 +1201,13 @@ class MainSVM {
        case "5696686a4bdc2da3298b456a":
         EditSimpleItemData(id, "StackMaxSize", Config.Items.DollarStack);
         break;
+        case "5d235b4d86f7742e017bc88a":
+          EditSimpleItemData(id, "StackMaxSize", Config.Items.GPStack);
+          break;
        default:
         EditSimpleItemData(id, "StackMaxSize", Config.Items.RubStack);
         break;
-      }
+       }
      }
     }
     //Allow armored rigs with armors
@@ -1390,6 +1452,7 @@ class MainSVM {
     items["5811ce572459770cba1a34ea"]._props.Grids[0]._props.cellsV = Config.Hideout.Stash.StashLvl2
     items["5811ce662459770f6f490f32"]._props.Grids[0]._props.cellsV = Config.Hideout.Stash.StashLvl3
     items["5811ce772459770e9e5f9532"]._props.Grids[0]._props.cellsV = Config.Hideout.Stash.StashLvl4
+    items["6602bcf19cc643f44a04274b"]._props.Grids[0]._props.cellsV = Config.Hideout.Stash.StashTUE 
    }
 
    //Enable hideout fast constructions
@@ -1768,38 +1831,37 @@ class MainSVM {
      }
     }
    }
-   if (Config.Raids.RaidEvents.Christmas || Config.Raids.RaidEvents.SnowEvent || Config.Raids.RaidEvents.Halloween) {
-    globals.EventType = [];
-    globals.EventType = ["None"];
-   }
-   if (Config.Raids.RaidEvents.Christmas)//I REALLY, REALLY NEED TO MAKE IT INTO A METHOD
-   {
-    globals.EventType.push("Christmas");
-
-    // Seasons.events[1].startDay ="1"
-    // Seasons.events[1].startMonth ="1"
-    // Seasons.events[1].endDay ="29"
-    // Seasons.events[1].endMonth ="12"
-    // Seasons.events[2].startDay ="1"
-    // Seasons.events[2].startMonth ="1"
-    // Seasons.events[2].endDay ="29"
-    // Seasons.events[2].endMonth ="12"
-   }
-   if (Config.Raids.RaidEvents.SnowEvent) {
-    WeatherValues.forceWinterEvent = true;
-    // Seasons.events[3].startDay ="1"
-    // Seasons.events[3].startMonth ="1"
-    // Seasons.events[3].endDay ="29"
-    // Seasons.events[3].endMonth ="12"
-   }
-   if (Config.Raids.RaidEvents.Halloween) {
-    globals.EventType.push("Halloween");
-    globals.EventType.push("HalloweenIllumination");
-    // Seasons.events[0].startDay ="1"
-    // Seasons.events[0].startMonth ="1"
-    // Seasons.events[0].endDay ="29"
-    // Seasons.events[0].endMonth ="12"
-   }
+  //  if (Config.Raids.RaidEvents.Christmas)//I REALLY, REALLY NEED TO MAKE IT INTO A METHOD
+  //  {
+  //   globals.EventType.push("Christmas");
+  //   // Seasons.events[1].startDay ="1"
+  //   // Seasons.events[1].startMonth ="1"
+  //   // Seasons.events[1].endDay ="29"
+  //   // Seasons.events[1].endMonth ="12"
+  //   // Seasons.events[2].startDay ="1"
+  //   // Seasons.events[2].startMonth ="1"
+  //   // Seasons.events[2].endDay ="29"
+  //   // Seasons.events[2].endMonth ="12"
+  //  }
+  //  if (Config.Raids.RaidEvents.SnowEvent) {
+  //   globals.EventType.push("WINTER_START");
+  //   // Seasons.events[3].startDay ="1"
+  //   // Seasons.events[3].startMonth ="1"
+  //   // Seasons.events[3].endDay ="29"
+  //   // Seasons.events[3].endMonth ="12"
+  //  }
+  //  if (Config.Raids.RaidEvents.Halloween) {
+  //   globals.EventType.push("Halloween");
+  //   globals.EventType.push("HalloweenIllumination");
+  //   // Seasons.events[0].startDay ="1"
+  //   // Seasons.events[0].startMonth ="1"
+  //   // Seasons.events[0].endDay ="29"
+  //   // Seasons.events[0].endMonth ="12"
+  //  }
+  //  if(Config.Raids.RaidEvents.DisableEvents)
+  //  {
+  //   globals.EventType = ["None"];
+  //  }
    if (Config.Raids.RaidEvents.RaidersEverywhere) // 3.9.0 Raider rework, need to split them up into 3 fields - Start of the raid Scavs, PMC and general waves.
    {
     for (let i in locations)//Locations DB
@@ -1836,9 +1898,69 @@ class MainSVM {
     locations["rezervbase"].base.BossLocationSpawn.push(BossWave)
     BossWave = CreateBoss("bossSanitar", 100, "followerSanitar", 2, locations["rezervbase"].base.OpenZones)
     locations["rezervbase"].base.BossLocationSpawn.push(BossWave)
-    if (Config.Raids.RaidEvents.IncludeTagilla) {
-     BossWave = CreateBoss("bossTagilla", 100, "followerBully", 0, locations["rezervbase"].base.OpenZones)
-     locations["rezervbase"].base.BossLocationSpawn.push(BossWave)
+    BossWave = CreateBoss("bossTagilla", 100, "followerBully", 0, locations["rezervbase"].base.OpenZones)
+    locations["rezervbase"].base.BossLocationSpawn.push(BossWave)
+    if (Config.Raids.RaidEvents.IncludeStreetBosses) {
+      const Kaban = {
+        "BossName": "bossBoar",
+        "BossChance": 100,
+        "BossZone": locations["rezervbase"].base.OpenZones,
+        "BossPlayer": false,
+        "BossDifficult": "normal",
+        "BossEscortType": "followerBoar",
+        "BossEscortDifficult": "normal",
+        "BossEscortAmount": "0",
+        "Time": -1,
+        "TriggerId": "",
+        "TriggerName": "",
+        "Supports": [
+         {
+          "BossEscortType": "followerBoar",
+          "BossEscortDifficult": ["normal"],
+          "BossEscortAmount": "4"
+         },
+         {
+          "BossEscortType": "followerBoarClose1",
+          "BossEscortDifficult": ["normal"],
+          "BossEscortAmount": "1"
+         },
+         {
+          "BossEscortType": "followerBoarClose2",
+          "BossEscortDifficult": ["normal"],
+          "BossEscortAmount": "1"
+         }]
+       }
+       locations["rezervbase"].base.BossLocationSpawn.push(Kaban)
+       const Kolontay = {
+        "BossName": "bossKolontay",
+        "BossChance": 100,
+        "BossZone": locations["rezervbase"].base.OpenZones,
+        "BossPlayer": false,
+        "BossDifficult": "normal",
+        "BossEscortType": "followerKolontayAssault",
+        "BossEscortDifficult": "normal",
+        "BossEscortAmount": "0",
+        "Time": -1,
+        "TriggerId": "",
+        "TriggerName": "",
+        "Supports": [
+         {
+          "BossEscortType": "followerKolontayAssault",
+          "BossEscortDifficult": ["normal"],
+          "BossEscortAmount": "2"
+         },
+         {
+          "BossEscortType": "followerKolontaySecurity",
+          "BossEscortDifficult": ["normal"],
+          "BossEscortAmount": "2"
+         },
+         {//IDK why an empty field is in DB, but i just copied it and let it be
+          "BossEscortType": "followerGluharScout",
+          "BossEscortDifficult": ["normal"],
+          "BossEscortAmount": "0"
+         }]
+       }
+       locations["rezervbase"].base.BossLocationSpawn.push(Kolontay)
     }
    }
    if (Config.Raids.RaidEvents.BossesOnHealthResort) {

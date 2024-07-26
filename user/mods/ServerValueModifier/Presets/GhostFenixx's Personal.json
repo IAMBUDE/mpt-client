@@ -15,9 +15,10 @@
     "MalfunctChanceMult": 1,
     "WeightChanger": 0.75,
     "ItemPriceMult": 1,
-    "BSGCashStack": false,
+    "EnableCurrency": false,
     "RubStack": 500000,
     "DollarStack": 50000,
+    "GPStack": 20,
     "EuroStack": 50000,
     "AmmoLoadSpeed": 1,
     "LootExp": 1,
@@ -46,6 +47,7 @@
   "Hideout": {
     "EnableStash": false,
     "Stash": {
+      "StashTUE": 72,
       "StashLvl4": 68,
       "StashLvl3": 48,
       "StashLvl2": 38,
@@ -328,8 +330,8 @@
       "SkierFighters": 4,
       "PeaceFighters": 15,
       "Christmas": false,
-      "Halloween": false,
-      "IncludeTagilla": false,
+      "Halloween": true,
+      "IncludeStreetBosses": false,
       "KillaFactory": false,
       "BossesOnReserve": false,
       "RaidersEverywhere": false,
@@ -495,6 +497,8 @@
     }
   },
   "CSM": {
+    "EnableCases": false,
+    "EnableSecureCases": false,
     "CustomPocket": true,
     "Pockets": {
       "DefaultPocket": false,
@@ -628,12 +632,14 @@
       "AlphaHSize": 2,
       "GammaHSize": 3,
       "GammaVSize": 3,
+      "GammaTUEHSize": 3,
+      "GammaTUEVSize": 3,
       "BetaVSize": 2,
       "BetaHSize": 3,
       "EpsilonHSize": 4,
       "EpsilonVSize": 2,
-      "DevVSize": 3,
-      "DevHSize": 3,
+      "DevVSize": 5,
+      "DevHSize": 5,
       "WaistPouchHSize": 2,
       "WaistPouchVSize": 2
     },
@@ -653,7 +659,7 @@
     "HostileBosses": false,
     "FriendlyBosses": false,
     "CarBaseStanding": 0.25,
-    "ScavTimer": 900,
+    "ScavTimer": 1,
     "ScavCustomPockets": false,
     "ScavLab": false,
     "FriendlyScavs": false,
@@ -670,7 +676,7 @@
       "RightLeg": 65
     },
     "EnableScavHealth": false,
-    "EnableScav": false
+    "EnableScav": true
   },
   "Bots": {
     "AIChance": {

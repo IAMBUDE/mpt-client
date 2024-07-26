@@ -15,9 +15,10 @@
     "MalfunctChanceMult": 1,
     "WeightChanger": 1,
     "ItemPriceMult": 1,
-    "BSGCashStack": false,
+    "EnableCurrency": false,
     "RubStack": 500000,
     "DollarStack": 50000,
+    "GPStack": 20,
     "EuroStack": 50000,
     "AmmoLoadSpeed": 1,
     "LootExp": 1,
@@ -46,6 +47,7 @@
   "Hideout": {
     "EnableStash": false,
     "Stash": {
+      "StashTUE": 72,
       "StashLvl4": 68,
       "StashLvl3": 48,
       "StashLvl2": 38,
@@ -61,13 +63,13 @@
       "EnergyRegen": 1
     },
     "WaterFilterTime": 60,
-    "BitcoinTime": 2416,
+    "BitcoinTime": 2401,
     "MaxBitcoins": 5,
     "NoFuelMult": 1,
     "ScavCasePrice": 1,
-    "ScavCaseTime": 1,
-    "HideoutConstMult": 0.2,
-    "HideoutProdMult": 0.5,
+    "ScavCaseTime": 0.001,
+    "HideoutConstMult": 0.1,
+    "HideoutProdMult": 0.2,
     "WaterFilterRate": 50,
     "GPUBoostRate": 1,
     "AirFilterRate": 1,
@@ -248,10 +250,10 @@
     "Skills": {
       "SkillFatigueReset": 200,
       "SkillFreshEffect": 1.3,
-      "SkillFPoints": 50,
-      "SkillPointsBeforeFatigue": 150,
+      "SkillFPoints": 100,
+      "SkillPointsBeforeFatigue": 200,
       "SkillMinEffect": 0.1,
-      "SkillFatiguePerPoint": 0.5
+      "SkillFatiguePerPoint": 0.6
     },
     "FallDamage": false,
     "BlackStomach": 5,
@@ -329,7 +331,7 @@
       "PeaceFighters": 15,
       "Christmas": false,
       "Halloween": false,
-      "IncludeTagilla": false,
+      "IncludeStreetBosses": false,
       "KillaFactory": false,
       "BossesOnReserve": false,
       "RaidersEverywhere": false,
@@ -495,6 +497,8 @@
     }
   },
   "CSM": {
+    "EnableCases": false,
+    "EnableSecureCases": false,
     "CustomPocket": false,
     "Pockets": {
       "DefaultPocket": false,
@@ -628,6 +632,8 @@
       "AlphaHSize": 2,
       "GammaHSize": 3,
       "GammaVSize": 3,
+      "GammaTUEHSize": 3,
+      "GammaTUEVSize": 3,
       "BetaVSize": 2,
       "BetaHSize": 3,
       "EpsilonHSize": 4,
