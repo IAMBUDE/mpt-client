@@ -448,7 +448,7 @@
             "_props": {
                 "Side": [ "Bear", "Usec" ],
                 "Prefab": {
-                    "path": "assets/content/hands/hands_tshirt_bear_black/hands_tshirt_bear_black.skin.bundle"
+                    "path": "Hands/artem_wtthands.bundle"
                 }
             }
         }
@@ -836,6 +836,10 @@
                 "Side": [ "Bear", "Usec" ],
                 "Prefab": {
                     "path": "Hands/artem_hands_19.bundle"
+                },
+                "WatchPrefab": {
+                    "path": "assets/content/hands/usec/usec_watch_garmintactix.bundle",
+                    "rcid": ""
                 }
             }
         }
@@ -855,6 +859,49 @@
             "en": {
                 "Name": "Troubleshooter",
                 "ShortName": "Troubleshooter",
+                "Description": ""
+            }
+        }
+    },
+    "artem_top_20 Upper": {
+        "clone": "642d9bbf6c06444bf7033855",
+        "sptID": "668bc5cd834c88e06b08b929",
+        "customization": {
+            "_props": {
+                "Side": [ "Bear", "Usec" ],
+                "Prefab": {
+                    "path": "Tops/artem_top_20.bundle"
+                }
+            }
+        }
+    },
+    "artem_top_20 Hands": {
+        "clone": "6436a4c2b6b75d4c89077fbd",
+        "sptID": "668bc5cd834c88e06b08b92a",
+        "customization": {
+            "_props": {
+                "Side": [ "Bear", "Usec" ],
+                "Prefab": {
+                    "path": "Hands/artem_hands_20.bundle"
+                }
+            }
+        }
+    },
+    "artem_top_20 Upper Suit": {
+        "clone": "66589eb63733207cb6677dc5",
+        "sptID": "668bc5cd834c88e06b08b92b",
+        "enable": true,
+        "customization": {
+            "_props": {
+                "Side": [ "Bear", "Usec" ],
+                "Body": "668bc5cd834c88e06b08b929",
+                "Hands": "668bc5cd834c88e06b08b92a"
+            }
+        },
+        "locales": {
+            "en": {
+                "Name": "Berserk T-Shirt",
+                "ShortName": "Berserk T-Shirt",
                 "Description": ""
             }
         }

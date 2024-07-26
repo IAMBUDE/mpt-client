@@ -1,6 +1,6 @@
 {
     "name": "Artem Equipment",
-    "version": "1.8.0",
+    "version": "1.8.2",
     "main": "src/mod.js",
     "license": "Mighty_Condor - Backend:University of Illinois/NCSA Open Source License",
     "author": "Crackbone",

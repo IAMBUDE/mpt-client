@@ -69,7 +69,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 300000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -88,7 +88,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 200000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -107,7 +107,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 400000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -126,7 +126,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 300000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -145,7 +145,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 500000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -164,7 +164,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 400000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -183,7 +183,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 700000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -278,7 +278,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 700000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -297,7 +297,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 700000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -316,7 +316,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 700000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -335,7 +335,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 500000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -354,7 +354,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 800000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -373,7 +373,26 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 700000,
+                    "_tpl": "5449016a4bdc2d6f028b456f"
+                }
+            ]
+        }
+    },
+    {
+        "_id": "ARTEM_TOP_20",
+        "tid": "ArtemTrader",
+        "suiteId": "668bc5cd834c88e06b08b92b",
+        "isActive": true,
+        "requirements": {
+            "loyaltyLevel": 1,
+            "profileLevel": 10,
+            "standing": 0,
+            "skillRequirements": [],
+            "questRequirements": [],
+            "itemRequirements": [
+                {
+                    "count": 450000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]
@@ -468,7 +487,7 @@
             "questRequirements": [],
             "itemRequirements": [
                 {
-                    "count": 100000,
+                    "count": 150000,
                     "_tpl": "5449016a4bdc2d6f028b456f"
                 }
             ]

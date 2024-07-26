@@ -10,31 +10,29 @@ import { ImageRouter } from "@spt/routers/ImageRouter";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
 import { ITraderConfig } from "@spt/models/spt/config/ITraderConfig";
-import { ITraderAssort, ITraderBase } from "@spt/models/eft/common/tables/ITrader";
 import { IRagfairConfig } from "@spt/models/spt/config/IRagfairConfig";
 import { JsonUtil } from "@spt/utils/JsonUtil";
+import { Money } from "@spt/models/enums/Money";
+import { Traders } from "@spt/models/enums/Traders";
+import { HashUtil } from "@spt/utils/HashUtil";
 
 // New trader settings
 import * as baseJson from "../db/base.json";
 import * as questAssort from "../db/questassort.json"
-import { TraderHelper } from "./traderHelpers";
-import { FluentAssortConstructor } from "./fluentTraderAssortCreator";
-import { Money } from "@spt/models/enums/Money";
-import { Traders } from "@spt/models/enums/Traders";
-import { HashUtil } from "@spt/utils/HashUtil";
-import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
-import { ICustomizationItem } from "@spt/models/eft/common/tables/ICustomizationItem";
 import * as assortJson from "../db/assort.json";
 
 
-
+import { ITraderAssort, ITraderBase } from "@spt/models/eft/common/tables/ITrader";
+import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
+import { TraderHelper } from "./traderHelpers";
+import { FluentAssortConstructor as FluentAssortCreator } from "./fluentTraderAssortCreator";
 
 class ArtemTrader implements IPreSptLoadMod, IPostDBLoadMod
 {
-    private mod: string
-    private logger: ILogger
-    private traderHelper: TraderHelper
-    private fluentTraderAssortHeper: FluentAssortConstructor
+    private mod: string;
+    private logger: ILogger;
+    private traderHelper: TraderHelper;
+    private fluentAssortCreator: FluentAssortCreator;
 
     constructor() {
         this.mod = "AAAArtemTrader"; // Set name of mod so we can log it to console later
@@ -60,7 +58,7 @@ class ArtemTrader implements IPreSptLoadMod, IPostDBLoadMod
 
         // Create helper class and use it to register our traders image/icon + set its stock refresh time
         this.traderHelper = new TraderHelper();
-        this.fluentTraderAssortHeper = new FluentAssortConstructor(hashUtil, this.logger);
+        this.fluentAssortCreator = new FluentAssortCreator(hashUtil, this.logger);
         this.traderHelper.registerProfileImage(baseJson, this.mod, preSptModLoader, imageRouter, "Artem.jpg");
         this.traderHelper.setTraderUpdateTime(traderConfig, baseJson, 3600, 4000);
 
@@ -72,9 +70,9 @@ class ArtemTrader implements IPreSptLoadMod, IPostDBLoadMod
 
         this.logger.debug(`[${this.mod}] preSpt Loaded`);
     }
-    
+
     /**
-     * Majority of trader-related work occurs after the Spt database has been loaded but prior to SPT code being run
+     * Majority of trader-related work occurs after the aki database has been loaded but prior to SPT code being run
      * @param container Dependency container
      */
     public postDBLoad(container: DependencyContainer): void
@@ -82,18 +80,17 @@ class ArtemTrader implements IPreSptLoadMod, IPostDBLoadMod
         this.logger.debug(`[${this.mod}] postDb Loading... `);
 
         // Resolve SPT classes we'll use
-        const DatabaseServer: DatabaseServer = container.resolve<DatabaseServer>("DatabaseServer");
+        const databaseServer: DatabaseServer = container.resolve<DatabaseServer>("DatabaseServer");
         const configServer: ConfigServer = container.resolve<ConfigServer>("ConfigServer");
         const jsonUtil: JsonUtil = container.resolve<JsonUtil>("JsonUtil");
 
         // Get a reference to the database tables
-        const tables = DatabaseServer.getTables();
+        const tables = databaseServer.getTables();
 
         // Add new trader to the trader dictionary in DatabaseServer - has no assorts (items) yet
         this.traderHelper.addTraderToDb(baseJson, tables, jsonUtil);
         this.addTraderToDb(baseJson, tables, jsonUtil);
         tables.traders[baseJson._id].questassort = questAssort;
-
 
         // Add trader to locale file, ensures trader text shows properly on screen
         // WARNING: adds the same text to ALL locales (e.g. chinese/french/english)
@@ -117,4 +114,4 @@ class ArtemTrader implements IPreSptLoadMod, IPostDBLoadMod
     }
 }
 
-module.exports = { mod: new ArtemTrader() }
+export const mod = new ArtemTrader();

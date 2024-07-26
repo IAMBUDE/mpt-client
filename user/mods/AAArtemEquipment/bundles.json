@@ -1,6 +1,22 @@
 {
     "manifest": [
         {
+            "key": "artem_wolfhat1.bundle",
+            "dependencyKeys": [
+                "cubemaps",
+                "shaders",
+                "assets/commonassets/physics/physicsmaterials.bundle"
+            ]
+        },
+        {
+            "key": "artem_wolfhat2.bundle",
+            "dependencyKeys": [
+                "cubemaps",
+                "shaders",
+                "assets/commonassets/physics/physicsmaterials.bundle"
+            ]
+        },
+        {
             "key": "artem_lowerhalfmask1.bundle",
             "dependencyKeys": [
                 "cubemaps",
@@ -236,6 +252,14 @@
             ]
         },
         {
+            "key": "artem_back6sh118snow.bundle",
+            "dependencyKeys": [
+                "cubemaps",
+                "shaders",
+                "assets/commonassets/physics/physicsmaterials.bundle"
+            ]
+        },
+        {
             "key": "artem_rockahat.bundle",
             "dependencyKeys": [
                 "cubemaps",
@@ -381,6 +405,22 @@
         },
         {
             "key": "artemtachelmet21.bundle",
+            "dependencyKeys": [
+                "cubemaps",
+                "shaders",
+                "assets/commonassets/physics/physicsmaterials.bundle"
+            ]
+        },
+        {
+            "key": "artem_helmet22.bundle",
+            "dependencyKeys": [
+                "cubemaps",
+                "shaders",
+                "assets/commonassets/physics/physicsmaterials.bundle"
+            ]
+        },
+        {
+            "key": "artem_helmet23.bundle",
             "dependencyKeys": [
                 "cubemaps",
                 "shaders",
@@ -710,6 +750,13 @@
             ]
         },
         {
+            "key": "Tops/artem_top_20.bundle",
+            "dependencyKeys": [
+                "cubemaps",
+                "shaders"
+            ]
+        },
+        {
             "key": "Hands/testhands.bundle",
             "dependencyKeys": [
                 "cubemaps",
@@ -797,6 +844,16 @@
             ]
         },
         {
+            "key": "Hands/artem_wtthands.bundle",
+            "dependencyKeys": [
+                "assets/content/hands/bear/bear_hands_watch_texture.bundles",
+                "assets/content/hands/bear/bear_watch.bundle",
+                "assets/content/hands/usec/materials/watch_usec_textures",
+                "cubemaps",
+                "shaders"
+            ]
+        },
+        {
             "key": "Hands/artem_hands_13.bundle",
             "dependencyKeys": [
                 "assets/content/hands/bear/bear_hands_watch_texture.bundles",
@@ -845,6 +902,16 @@
         },
         {
             "key": "Hands/artem_hands_19.bundle",
+            "dependencyKeys": [
+                "assets/content/hands/bear/bear_hands_watch_texture.bundles",
+                "assets/content/hands/bear/bear_watch.bundle",
+                "assets/content/hands/usec/materials/watch_usec_textures",
+                "cubemaps",
+                "shaders"
+            ]
+        },
+        {
+            "key": "Hands/artem_hands_20.bundle",
             "dependencyKeys": [
                 "assets/content/hands/bear/bear_hands_watch_texture.bundles",
                 "assets/content/hands/bear/bear_watch.bundle",

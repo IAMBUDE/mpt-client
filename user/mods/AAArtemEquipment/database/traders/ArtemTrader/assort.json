@@ -1,6 +1,30 @@
 {
 	"items": [
 		{
+			"_id": "ARTEM_WOLFCOWL1",
+			"_tpl": "669819683571cb050b0b6391",
+			"parentId": "hideout",
+			"slotId": "hideout",
+			"upd": {
+				"UnlimitedCount": false,
+				"StackObjectsCount": 230,
+				"BuyRestrictionMax": 6,
+				"BuyRestrictionCurrent": 0
+			}
+		},
+		{
+			"_id": "ARTEM_WOLFCOWL2",
+			"_tpl": "669819683571cb050b0b6392",
+			"parentId": "hideout",
+			"slotId": "hideout",
+			"upd": {
+				"UnlimitedCount": false,
+				"StackObjectsCount": 230,
+				"BuyRestrictionMax": 6,
+				"BuyRestrictionCurrent": 0
+			}
+		},
+		{
 			"_id": "ARTEM_LOWERHALFMASK1",
 			"_tpl": "668bc5cd834c88e06b08b693",
 			"parentId": "hideout",
@@ -213,6 +237,18 @@
 		{
 			"_id": "ARTEM_BACKPACK6SH118",
 			"_tpl": "6673b1ac5cae0610f1079d71",
+			"parentId": "hideout",
+			"slotId": "hideout",
+			"upd": {
+				"UnlimitedCount": false,
+				"StackObjectsCount": 240,
+				"BuyRestrictionMax": 2,
+				"BuyRestrictionCurrent": 0
+			}
+		},
+		{
+			"_id": "ARTEM_BACKPACK6SH118ALPINE",
+			"_tpl": "668bc5cd834c88e06b08b928",
 			"parentId": "hideout",
 			"slotId": "hideout",
 			"upd": {
@@ -829,6 +865,54 @@
 			"slotId": "Helmet_back"
 		},
 		{
+			"_id": "ARTEM_HELMET22",
+			"_tpl": "669819683571cb050b0b6393",
+			"parentId": "hideout",
+			"slotId": "hideout",
+			"upd": {
+				"UnlimitedCount": false,
+				"StackObjectsCount": 985,
+				"BuyRestrictionMax": 4,
+				"BuyRestrictionCurrent": 0
+			}
+		},
+		{
+			"_id": "ARTEM_TACHELMET22_top",
+			"_tpl": "6551fec55d0cf82e51014288",
+			"parentId": "ARTEM_HELMET22",
+			"slotId": "Helmet_top"
+		},
+		{
+			"_id": "ARTEM_TACHELMET22_back",
+			"_tpl": "655200ba0ef76cf7be09d528",
+			"parentId": "ARTEM_HELMET22",
+			"slotId": "Helmet_back"
+		},
+		{
+			"_id": "ARTEM_HELMET23",
+			"_tpl": "669819683571cb050b0b6394",
+			"parentId": "hideout",
+			"slotId": "hideout",
+			"upd": {
+				"UnlimitedCount": false,
+				"StackObjectsCount": 985,
+				"BuyRestrictionMax": 4,
+				"BuyRestrictionCurrent": 0
+			}
+		},
+		{
+			"_id": "ARTEM_TACHELMET23_top",
+			"_tpl": "6551fec55d0cf82e51014288",
+			"parentId": "ARTEM_HELMET23",
+			"slotId": "Helmet_top"
+		},
+		{
+			"_id": "ARTEM_TACHELMET23_back",
+			"_tpl": "655200ba0ef76cf7be09d528",
+			"parentId": "ARTEM_HELMET23",
+			"slotId": "Helmet_back"
+		},
+		{
 			"_id": "ARTEM_DEVRONINALPINE",
 			"_tpl": "668bc5cd834c88e06b08b6a9",
 			"parentId": "hideout",
@@ -1388,6 +1472,22 @@
 		}
 	],
 	"barter_scheme": {
+		"ARTEM_WOLFCOWL1": [
+			[
+				{
+					"count": 40000,
+					"_tpl": "5449016a4bdc2d6f028b456f"
+				}
+			]
+		],
+		"ARTEM_WOLFCOWL2": [
+			[
+				{
+					"count": 40000,
+					"_tpl": "5449016a4bdc2d6f028b456f"
+				}
+			]
+		],
 		"ARTEM_DEVRONINALPINE": [
 			[
 				{
@@ -1453,6 +1553,14 @@
 			]
 		],
 		"ARTEM_BACKPACK6SH118": [
+			[
+				{
+					"count": 152000,
+					"_tpl": "5449016a4bdc2d6f028b456f"
+				}
+			]
+		],
+		"ARTEM_BACKPACK6SH118ALPINE": [
 			[
 				{
 					"count": 152000,
@@ -1668,6 +1776,22 @@
 				}
 			]
 		],
+		"ARTEM_HELMET22": [
+			[
+				{
+					"count": 140000,
+					"_tpl": "5449016a4bdc2d6f028b456f"
+				}
+			]
+		],
+		"ARTEM_HELMET23": [
+			[
+				{
+					"count": 140000,
+					"_tpl": "5449016a4bdc2d6f028b456f"
+				}
+			]
+		],
 		"ARTEM_HELMET18": [
 			[
 				{
@@ -1844,6 +1968,7 @@
 	"loyal_level_items": {
 		"ARTEM_BOXITEM": 4,
 		"ARTEM_BACKPACK6SH118": 4,
+		"ARTEM_BACKPACK6SH118ALPINE": 4,
 		"ARTEM_CPCMC": 4,
 		"ARTEM_CPCALP": 4,
 		"ARTEM_CPCMCB": 4,
@@ -1858,6 +1983,8 @@
 		"ARTEM_HELMET6": 3,
 		"ARTEM_HELMET8": 3,
 		"ARTEM_HELMET20": 3,
+		"ARTEM_HELMET22": 3,
+		"ARTEM_HELMET23": 3,
 		"ARTEM_HELMET18": 3,
 		"ARTEM_TROOPER35": 3,
 		"ARTEM_VEST3": 3,
@@ -1879,6 +2006,8 @@
 		"ARTEM_BLACKROCKALP": 2,
 		"ARTEM_HELMET13": 2,
 		"ARTEM_HELMET21": 2,
+		"ARTEM_WOLFCOWL1": 2,
+		"ARTEM_WOLFCOWL2": 2,
 		"ARTEM_BLACKROCKBMC": 2,
 		"ARTEM_BLACKROCKMC": 2,
 		"ARTEM_HELMET12": 2,
