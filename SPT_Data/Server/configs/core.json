@@ -1,5 +1,5 @@
 {
-    "sptVersion": "3.9.3",
+    "sptVersion": "3.9.4",
     "projectName": "SPT",
     "compatibleTarkovVersion": "0.14.9.30626",
     "serverName": "SPT Server",
@@ -34,6 +34,6 @@
         "createNewProfileTypesBlacklist": []
     },
     "customWatermarkLocaleKeys": [],
-    "commit": "a00a810f0ee3ebfedb408d6dc48fc42021648f57",
-    "buildTime": 1721400330172
+    "commit": "45e559efff0a6b5233df4e33b65c34850b425e85",
+    "buildTime": 1722019157568
 }
