@@ -381,9 +381,9 @@
   },
   "Fleamarket": {
     "EnableFleaConditions": false,
-    "EnablePlayerOffers": false,
+    "EnablePlayerOffers": true,
     "FleaFIR": false,
-    "FleaNoFIRSell": false,
+    "FleaNoFIRSell": true,
     "EventOffers": false,
     "SellOffersAmount": 10,
     "FleaConditions": {
@@ -406,7 +406,7 @@
     "FleaMarketLevel": 15,
     "FleaBlacklist": null,
     "DisableBSGList": false,
-    "EnableFleamarket": false,
+    "EnableFleamarket": true,
     "Sell_mult": 1.24,
     "Tradeoffer_max": 1,
     "Rep_loss": 0.03,
