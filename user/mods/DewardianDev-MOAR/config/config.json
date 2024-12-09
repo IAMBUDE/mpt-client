@@ -4,12 +4,12 @@
   "pmcDifficulty": 0.8,
   "scavDifficulty": 0.6,
 
-  "defaultScavStartWaveRatio": 0.5,
-  "defaultScavWaveMultiplier": 2,
+  "defaultScavStartWaveRatio": 0.3,
+  "defaultScavWaveMultiplier": 3,
 
   "startingPmcs": false,
-  "defaultPmcStartWaveRatio": 0.8,
-  "defaultPmcWaveMultiplier": 2,
+  "defaultPmcStartWaveRatio": 0.4,
+  "defaultPmcWaveMultiplier": 1.5,
 
   "defaultMaxBotCap": 35,
   "defaultMaxBotPerZone": 11,
