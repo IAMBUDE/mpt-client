@@ -1,23 +1,23 @@
 {
   "enableBotSpawning": true,
 
-  "pmcDifficulty": 1,
-  "scavDifficulty": 0.7,
+  "pmcDifficulty": 1.1,
+  "scavDifficulty": 1,
 
-  "scavWaveDistribution": 0.3,
-  "scavWaveQuantity": 3,
+  "scavWaveDistribution": 0.4,
+  "scavWaveQuantity": 1,
 
   "startingPmcs": false,
 
   "pmcWaveDistribution": 0.4,
-  "pmcWaveQuantity": 3,
+  "pmcWaveQuantity": 1,
 
   "zombiesEnabled": false,
   "zombieWaveDistribution": 0.5,
   "zombieWaveQuantity": 1,
   "zombieHealth": 1,
 
-  "maxBotCap": 35,
+  "maxBotCap": 27,
   "maxBotPerZone": 9,
 
   "moreScavGroups": false,
