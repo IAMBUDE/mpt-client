@@ -1,12 +1,12 @@
 {
   "order": [
+    "DewardianDev-MOAR",
     "tyfon-uifixes",
     "MoreCheckmarksBackend",
     "Virtual's Custom Quest Loader",
     "acidphantasm-scorpion",
     "fika-server",
     "SVM",
-    "DewardianDev-MOAR",
     "zSolarint-SAIN-ServerMod"
   ]
 }
