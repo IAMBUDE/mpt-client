@@ -9,7 +9,7 @@
 
   "startingPmcs": false,
 
-  "pmcWaveDistribution": 0.8,
+  "pmcWaveDistribution": 0.5,
   "pmcWaveQuantity": 1,
 
   "zombiesEnabled": false,
@@ -32,7 +32,7 @@
   "bossOpenZones": false,
 
   "randomRaiderGroup": true,
-  "randomRaiderGroupChance": 17,
+  "randomRaiderGroupChance": 13,
 
   "randomRogueGroup": false,
   "randomRogueGroupChance": 10,
