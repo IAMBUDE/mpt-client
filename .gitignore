@@ -25,9 +25,6 @@ Aki_Data/Launcher/*
 !BepInEx
 BepInEx/*
 !BepInEx/config
-BepInEx/*
-!BepInEx/config/BepInEx.cfg
-!BepInEx/config/com.bepis.bepinex.configurationmanager.cfg
 !BepInEx/core
 !BepInEx/patchers
 
