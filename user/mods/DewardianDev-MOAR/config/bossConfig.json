@@ -1,6 +1,14 @@
 {
   "ADD_THESE_TO_A_MAP_TO_OVERRIDE_OR_ADD_A_BOSS_TO_A_MAP": {
     "BOSS_NAME_EXAMPLE": "CHANCE_OF_SPAWNING_PERCENT",
+    "sectantPriest": 0,
+    "arenaFighterEvent": 0,
+    "bossBoarSniper": 0,
+    "pmcBot": 0,
+    "bossZryachiy": 0,
+    "exUsec": 0,
+    "crazyAssaultEvent": 0,
+    "peacemaker": 0,
     "bossKojaniy": 0,
     "bossGluhar": 0,
     "bossSanitar": 0,
@@ -13,8 +21,8 @@
     "bossBully": 0
   },
   "customs": {
-    "bossKnight": 15,
-    "bossPartisan": 15,
+    "bossKnight": 30,
+    "bossPartisan": 30,
     "bossBully": 30
   },
   "factoryDay": {
@@ -28,15 +36,15 @@
   },
   "laboratory": {},
   "lighthouse": {
-    "bossKnight": 15,
-    "bossPartisan": 15
+    "bossKnight": 30,
+    "bossPartisan": 30
   },
   "rezervbase": {
     "bossGluhar": 30
   },
   "shoreline": {
-    "bossKnight": 15,
-    "bossPartisan": 15,
+    "bossKnight": 30,
+    "bossPartisan": 30,
     "bossSanitar": 30
   },
   "tarkovstreets": {
@@ -45,8 +53,8 @@
   },
   "woods": {
     "bossKojaniy": 30,
-    "bossKnight": 15,
-    "bossPartisan": 15
+    "bossKnight": 30,
+    "bossPartisan": 30
   },
   "gzLow": {},
   "gzHigh": {
