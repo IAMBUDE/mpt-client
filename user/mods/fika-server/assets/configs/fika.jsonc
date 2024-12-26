@@ -31,7 +31,7 @@
     },
     "dedicated": {
         "profiles": {
-            "amount": 0
+            "amount": 1
         },
         "scripts": {
             "generate": true,

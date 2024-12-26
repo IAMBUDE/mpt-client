@@ -37,12 +37,15 @@
     "F_MMUI_HostRaidButton": "Založit RAID",
     "F_MMUI_JoinButton": "PŘIPOJIT",
     "F_MMUI_SelectAmountHeader": "VYBERTE POČET",
+    "F_MMUI_SessionSettingsHeader": "SESSION SETTINGS",
     "F_MMUI_SelectAmountDescription": "Kolik lidí (včetně vás) bude hrát?",
     "F_MMUI_UseDedicatedHost": "Použít Dedikovaného Hosta",
     "F_MMUI_StartButton": "SPUSTIT",
     "F_MMUI_LoadingScreenHeader": "NAČÍTÁNÍ",
     "F_MMUI_LoadingScreenDescription": "Počkejte prosím, než se raid spustí... může to chvíli trvat.",
     "F_MMUI_JoinAsSpectator": "Join as spectator",
+    "F_UI_StartRaid": "Start Raid",
+    "F_UI_StartRaidDescription": "Starts the raid\nNew players will not be able to join",
     "F_UI_CannotJoinRaidOtherMap": "Nelze se připojit k raidu na jiné mapě.\nMapa raidu: {0}",
     "F_UI_CannotJoinRaidOtherTime": "Nelze se připojit k raidu v jiném čase.",
     "F_UI_CannotJoinRaidScavAsPMC": "Ke scav raidu se jako PMC nemůžete připojit.",
@@ -97,6 +100,7 @@
     "F_Notification_ItemReceived": "You received a {0} from {1}",
     "F_Notification_RaidSettingsDisabled": "Editing of RaidSettings is disabled by the server host",
     "F_UI_ExtractMessage": "Press {0} to extract",
+    "F_UI_DownloadProfile": "DOWNLOAD PROFILE",
     "F_BepInEx_H_Advanced": "Advanced",
     "F_BepInEx_H_Coop": "Coop",
     "F_BepInEx_H_Coop_NamePlates": "Coop | Name Plates",
@@ -239,5 +243,7 @@
     "F_MMUI_InStash": "In Stash",
     "F_MMUI_InHideout": "In Hideout",
     "F_MMUI_InFlea": "In Flea",
-    "F_MMUI_RaidDetails": "Playing as a {0} on {1}\nTime: {2}"
+    "F_MMUI_RaidDetails": "Playing as a {0} on {1}\nTime: {2}",
+    "F_UI_LocaleError_H": "LOCALES ERROR",
+    "F_UI_LocaleError_D": "There were errors when loading the Fika locales. Translation is now using fallbacks for the failed headers. Please report this to the developers!\n\nFailed keys: {0}"
 }

@@ -37,12 +37,15 @@
     "F_MMUI_HostRaidButton": "레이드 호스트하기",
     "F_MMUI_JoinButton": "참가",
     "F_MMUI_SelectAmountHeader": "양을 선택하십시오.",
+    "F_MMUI_SessionSettingsHeader": "SESSION SETTINGS",
     "F_MMUI_SelectAmountDescription": "당신을 포함하여 몇 명의 플레이어가 참가합니까?",
     "F_MMUI_UseDedicatedHost": "전담 호스트를 사용하여 주십시오",
     "F_MMUI_StartButton": "시작",
     "F_MMUI_LoadingScreenHeader": "로딩 중",
     "F_MMUI_LoadingScreenDescription": "레이드를 동기화하는 중입니다... 잠시만 기다려주십시오.",
     "F_MMUI_JoinAsSpectator": "관전모드로 참여하기",
+    "F_UI_StartRaid": "Start Raid",
+    "F_UI_StartRaidDescription": "Starts the raid\nNew players will not be able to join",
     "F_UI_CannotJoinRaidOtherMap": "다른 맵에서 진행중인 레이드에는 참가 할 수 없습니다.\n레이드 맵: {0}",
     "F_UI_CannotJoinRaidOtherTime": "다른 시간대의 레이드에는 참가할 수 없습니다.",
     "F_UI_CannotJoinRaidScavAsPMC": "PMC 캐릭터로는 Scav레이드에 참가 할 수없습니다.",
@@ -97,6 +100,7 @@
     "F_Notification_ItemReceived": "{1} 에게서 {0} 를 받았습니다",
     "F_Notification_RaidSettingsDisabled": "레이드 설정 편집이 서버 호스트에 의해서 비활성화 되어있습니다.",
     "F_UI_ExtractMessage": "{0} 을 눌러 탈출을 완료하세요",
+    "F_UI_DownloadProfile": "DOWNLOAD PROFILE",
     "F_BepInEx_H_Advanced": "고급",
     "F_BepInEx_H_Coop": "코옵",
     "F_BepInEx_H_Coop_NamePlates": "코옵 | 네임 플레이트",
@@ -239,5 +243,7 @@
     "F_MMUI_InStash": "In Stash",
     "F_MMUI_InHideout": "In Hideout",
     "F_MMUI_InFlea": "In Flea",
-    "F_MMUI_RaidDetails": "Playing as a {0} on {1}\nTime: {2}"
+    "F_MMUI_RaidDetails": "Playing as a {0} on {1}\nTime: {2}",
+    "F_UI_LocaleError_H": "LOCALES ERROR",
+    "F_UI_LocaleError_D": "There were errors when loading the Fika locales. Translation is now using fallbacks for the failed headers. Please report this to the developers!\n\nFailed keys: {0}"
 }
