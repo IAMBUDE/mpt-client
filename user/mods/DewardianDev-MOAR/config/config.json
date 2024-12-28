@@ -1,8 +1,8 @@
 {
   "enableBotSpawning": true,
 
-  "pmcDifficulty": 1.1,
-  "scavDifficulty": 0.8,
+  "pmcDifficulty": 1.2,
+  "scavDifficulty": 1.0,
 
   "scavWaveDistribution": 0.6,
   "scavWaveQuantity": 0.9,
@@ -30,16 +30,16 @@
   "bossOpenZones": false,
 
   "randomRaiderGroup": true,
-  "randomRaiderGroupChance": 20,
+  "randomRaiderGroupChance": 25,
 
   "randomRogueGroup": false,
   "randomRogueGroupChance": 10,
 
   "disableBosses": false,
-  "mainBossChanceBuff": 0,
+  "mainBossChanceBuff": 15,
 
   "bossInvasion": true,
-  "bossInvasionSpawnChance": 5,
+  "bossInvasionSpawnChance": 9,
   "gradualBossInvasion": true,
 
   "debug": false
