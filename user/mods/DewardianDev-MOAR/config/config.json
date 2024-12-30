@@ -4,10 +4,14 @@
   "pmcDifficulty": 1.2,
   "scavDifficulty": 1.0,
 
-  "scavWaveDistribution": 0.6,
-  "scavWaveQuantity": 0.9,
+  "scavWaveDistribution": 0.5,
+  "scavWaveQuantity": 0.8,
 
   "startingPmcs": false,
+
+  "playerOpenZones": false,
+  "pmcOpenZones": true,
+  "allOpenZones": false,
 
   "pmcWaveDistribution": 0.7,
   "pmcWaveQuantity": 1.5,
@@ -17,8 +21,8 @@
   "zombieWaveQuantity": 1,
   "zombieHealth": 1,
 
-  "maxBotCap": 27,
-  "maxBotPerZone": 7,
+  "maxBotCap": 25,
+  "maxBotPerZone": 6,
 
   "moreScavGroups": false,
   "morePmcGroups": false,
@@ -30,13 +34,13 @@
   "bossOpenZones": false,
 
   "randomRaiderGroup": true,
-  "randomRaiderGroupChance": 25,
+  "randomRaiderGroupChance": 20,
 
   "randomRogueGroup": false,
   "randomRogueGroupChance": 10,
 
   "disableBosses": false,
-  "mainBossChanceBuff": 15,
+  "mainBossChanceBuff":15,
 
   "bossInvasion": true,
   "bossInvasionSpawnChance": 9,
