@@ -7,7 +7,11 @@ import { ConfigServer } from "@spt/servers/ConfigServer";
 import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
 import { DependencyContainer } from "tsyringe";
 import { globalValues } from "../GlobalValues";
-import { cloneDeep, getRandomPresetOrCurrentlySelectedPreset } from "../utils";
+import {
+  cloneDeep,
+  getRandomPresetOrCurrentlySelectedPreset,
+  saveToFile,
+} from "../utils";
 import { ILocationConfig } from "@spt/models/spt/config/ILocationConfig.d";
 import { originalMapList } from "./constants";
 import { buildBossWaves } from "./buildBossWaves";
@@ -63,12 +67,12 @@ export const buildWaves = (container: DependencyContainer) => {
     }
   });
 
-  config.debug &&
-    console.log(
-      globalValues.forcedPreset === "custom"
-        ? "custom"
-        : globalValues.currentPreset
-    );
+  // config.debug &&
+  console.log(
+    globalValues.forcedPreset === "custom"
+      ? "custom"
+      : globalValues.currentPreset
+  );
 
   const {
     bigmap: customs,

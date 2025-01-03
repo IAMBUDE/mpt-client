@@ -22,7 +22,7 @@
   "zombieHealth": 1,
 
   "maxBotCap": 25,
-  "maxBotPerZone": 6,
+  "maxBotPerZone": 5,
 
   "moreScavGroups": false,
   "morePmcGroups": false,
