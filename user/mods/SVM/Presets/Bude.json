@@ -69,8 +69,8 @@
       "EnergyRegen": 1
     },
     "WaterFilterTime": 150,
-    "BitcoinTime": 1900,
-    "MaxBitcoins": 5,
+    "BitcoinTime": 2200,
+    "MaxBitcoins": 3,
     "NoFuelMult": 2,
     "ScavCasePrice": 1,
     "ScavCaseTime": 1,
