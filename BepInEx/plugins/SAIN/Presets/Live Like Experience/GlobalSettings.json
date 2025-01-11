@@ -175,7 +175,7 @@
   "Hearing": {
     "RAIN_SOUND_COEF_OUTSIDE": 0.5,
     "RAIN_SOUND_COEF_INSIDE": 0.75,
-    "MaxFootstepAudioDistance": 70.0,
+    "MaxFootstepAudioDistance": 50.0,
     "MaxFootstepAudioDistanceNoHeadphones": 50.0,
     "HEAR_DISPERSION_VALUES": {
       "Shot": 17.5,
@@ -214,8 +214,8 @@
     "HEAR_DISPERSION_ANGLE_MULTI_MIN": 0.5,
     "BUNKER_REDUCTION_COEF": 0.03,
     "BUNKER_ELEV_DIFF_COEF": 0.01,
-    "GUNSHOT_OCCLUSION_MOD": 0.8,
-    "GUNSHOT_OCCLUSION_MOD_SUPP": 0.65,
+    "GUNSHOT_OCCLUSION_MOD": 0.1,
+    "GUNSHOT_OCCLUSION_MOD_SUPP": 0.05,
     "FOOTSTEP_OCCLUSION_MOD": 0.6,
     "FOOTSTEP_OCCLUSION_MOD_SPRINT": 0.8,
     "OTHER_OCCLUSION_MOD": 0.6,
@@ -254,11 +254,11 @@
     "BaseSoundRange_EatDrink": 40.0,
     "MaxRangeToReportEnemyActionNoHeadset": 50.0,
     "BaseHearingDelayWithEnemy": 0.1,
-    "BaseHearingDelayAtPeace": 0.25,
-    "GunshotAudioMultiplier": 1.0,
-    "FootstepAudioMultiplier": 0.5,
-    "SuppressorModifier": 0.6,
-    "SubsonicModifier": 0.33,
+    "BaseHearingDelayAtPeace": 0.15,
+    "GunshotAudioMultiplier": 0.5,
+    "FootstepAudioMultiplier": 1.25,
+    "SuppressorModifier": 0.25,
+    "SubsonicModifier": 0.2,
     "HearingDistances": {
       "Caliber9x18PM": 110.0,
       "Caliber9x19PARA": 110.0,
@@ -419,7 +419,7 @@
       "Peripheral": {
         "Description": "Adds additional vision speed reduction to targets in a bot's peripheral vision.Scales with the angle from their look direction.",
         "Enabled": true,
-        "PERIPHERAL_VISION_START_ANGLE": 30.0,
+        "PERIPHERAL_VISION_START_ANGLE": 70.0,
         "PERIPHERAL_VISION_MAX_REDUCTION_COEF": 1.2
       },
       "Pose": {
@@ -431,12 +431,12 @@
       "ThirdParty": {
         "Description": "When an enemy is a certain angle away from their active enemies last known position, this will reduce their vision speed of that target up to the maximum set amount.",
         "Enabled": true,
-        "THIRDPARTY_VISION_START_ANGLE": 30.0,
+        "THIRDPARTY_VISION_START_ANGLE": 50.0,
         "THIRDPARTY_VISION_MAX_COEF": 1.5
       }
     },
     "VisionDistance": {
-      "MovementDistanceModifier": 2.0
+      "MovementDistanceModifier": 1.0
     },
     "Time": {
       "NightTimeVisionModifier": 0.5,
