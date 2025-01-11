@@ -5,7 +5,7 @@
   "scavDifficulty": 0.8,
 
   "scavWaveDistribution": 0.5,
-  "scavWaveQuantity": 0.8,
+  "scavWaveQuantity": 0.9,
 
   "startingPmcs": false,
 
@@ -14,7 +14,7 @@
   "allOpenZones": false,
 
   "pmcWaveDistribution": 0.7,
-  "pmcWaveQuantity": 1.5,
+  "pmcWaveQuantity": 1.2,
 
   "zombiesEnabled": false,
   "zombieWaveDistribution": 0.5,
@@ -34,7 +34,7 @@
   "bossOpenZones": false,
 
   "randomRaiderGroup": true,
-  "randomRaiderGroupChance": 20,
+  "randomRaiderGroupChance": 13,
 
   "randomRogueGroup": false,
   "randomRogueGroupChance": 10,
@@ -42,7 +42,7 @@
   "disableBosses": false,
   "mainBossChanceBuff":15,
 
-  "bossInvasion": true,
+  "bossInvasion": false,
   "bossInvasionSpawnChance": 9,
   "gradualBossInvasion": true,
 
