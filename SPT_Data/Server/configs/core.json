@@ -1,7 +1,7 @@
 {
-    "sptVersion": "3.10.5",
+    "sptVersion": "3.11.3",
     "projectName": "SPT",
-    "compatibleTarkovVersion": "0.15.5.33420",
+    "compatibleTarkovVersion": "0.16.0.35392",
     "serverName": "SPT Server",
     "profileSaveIntervalSeconds": 15,
     "sptFriendNickname": "SPT",
@@ -184,12 +184,9 @@
         }
     },
     "features": {
-        "autoInstallModDependencies": false,
         "compressProfile": false,
         "chatbotFeatures": {
-            "sptFriendEnabled": true,
             "sptFriendGiftsEnabled": true,
-            "commandoEnabled": true,
             "commandoFeatures": {
                 "giveCommandEnabled": true
             },
@@ -199,11 +196,15 @@
             "ids": {
                 "commando": "6723fd51c5924c57ce0ca01e",
                 "spt": "6723fd51c5924c57ce0ca01f"
+            },
+            "enabledBots": {
+                "6723fd51c5924c57ce0ca01e": true,
+                "6723fd51c5924c57ce0ca01f": true
             }
         },
         "createNewProfileTypesBlacklist": []
     },
     "customWatermarkLocaleKeys": [],
-    "commit": "51869ce70d9c0a6e11c5bd7b406bca5c806f1269",
-    "buildTime": 1735756224869
+    "commit": "7a9a346bb2a08bffb965150784ca7869741804b1",
+    "buildTime": 1744140374083
 }
