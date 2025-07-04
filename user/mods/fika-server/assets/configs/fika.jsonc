@@ -28,7 +28,7 @@
 			"disableSPTChatBots": true
 		},
 		"allowItemSending": true,
-		"sentItemsLoseFIR": true,
+		"sentItemsLoseFIR": false,
 		"launcherListAllProfiles": false,
 		"sessionTimeout": 5,
 		"showDevProfile": false,
@@ -42,7 +42,7 @@
 	},
 	"headless": {
 		"profiles": {
-			"amount": 0,
+			"amount": 1,
 			"aliases": {}
 		},
 		"scripts": {
