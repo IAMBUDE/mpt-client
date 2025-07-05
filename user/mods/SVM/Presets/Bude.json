@@ -428,7 +428,7 @@
       "FleaVests_Max": 100,
       "FleaKeys_Max": 100
     },
-    "OverrideOffers": false,
+    "OverrideOffers": true,
     "FleaMarketLevel": 15,
     "FleaBlacklist": null,
     "DisableBSGList": false,
